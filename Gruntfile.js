@@ -65,23 +65,32 @@ module.exports = function(grunt) {
         var LANG_COUNT = 2,
             languages = ["english", "spanish"],
             output = [],
-            lines = grunt.file.read("localization/localization.csv").split("\r\n");
+            lines = grunt.file.read("client/localization/localization.csv").split("\r\n");
         for (var i = 0; i < LANG_COUNT; i++) {
-            output.push([]);
+            output.push({
+                dom: []
+            });
         }
         for (var i = 1; i < lines.length; i++) {
             grunt.log.writeln("Line " + i + ": " + lines[i]);
             var localizations = lines[i].split(",");
             if (localizations.length < 3) break;
             for (var j = 0; j < LANG_COUNT; j++) {
-                output[j].push({
-                    id: localizations[0],
-                    content: localizations[1 + j]
-                });
+                
+                if (localizations[0].indexOf("$") === 0) {
+                    // This is a variable
+                    output[j][localizations[0]] = localizations[1 + j];
+                }
+                else {
+                    output[j].dom.push({
+                        id: localizations[0],
+                        content: localizations[1 + j]
+                    });
+                }
             }
         }
         for (var i = 0; i < LANG_COUNT; i++) {
-            grunt.file.write("localization/localization." + languages[i] + ".js",
+            grunt.file.write("client/localization/localization." + languages[i] + ".js",
                 "KAREL.localization = " +
                 JSON.stringify(output[i], null, 4)
             );

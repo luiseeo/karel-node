@@ -547,11 +547,12 @@ KAREL.compilador = (function () {
     }
 
     var animationRequest = 0;
+    var timeout = null;
     function aniStep(timestamp) {
         var start = new Date().getTime();
         // Sleep
         if (KAREL.compilador.retraso > 0) {
-            setTimeout(smoothStep, KAREL.compilador.retraso, start);
+            timeout = setTimeout(smoothStep, KAREL.compilador.retraso, start);
         }
         else {
             smoothStep(start);
@@ -583,7 +584,7 @@ KAREL.compilador = (function () {
             this.initialize();
             break;
         case maquinavirtual.karelmodes.running:
-            clearTimeout(maquinavirtual.timer);
+            clearTimeout(timeout);
             if (animationRequest !== null) {
                 KAREL.utils.highlightLine(maquinavirtual.currentLine);
                 cancelAnimationFrame(animationRequest);
@@ -610,7 +611,7 @@ KAREL.compilador = (function () {
 }());
 
 function loadLanguage(language) {
-    KAREL.localization.forEach(function (translation) {
+    KAREL.localization.dom.forEach(function (translation) {
         var element = document.getElementById(translation.id);
         if (element !== null) {
             element.innerText = translation.content;
@@ -626,6 +627,7 @@ $(document).ready(function() {
     //dependencias
     var Utils = KAREL.utils,
         Compilador = KAREL.compilador,
+        Localization = KAREL.localization,
         retrasoEl = $("#delay"),
         //returns an icon object as required by jQuery UI
         icon = function (iconName) {
@@ -717,13 +719,13 @@ $(document).ready(function() {
     $("#toolbarEjecucion button#initialize").button(icon('seek-first')).click(WC(Compilador.initialize));
     $("#toolbarEjecucion button#step").button(icon('seek-next')).click(WC(Compilador.step));
     $("#toolbarEjecucion button#run").button(icon('play')).click(function() {
-        var options = ( $(this).text() === "Correr" ) ?
+        var options = ( $(this).text() === Localization.$run ) ?
             {
-                label: "Detener",
+                label: Localization.$stop,
                 icons: { primary: "ui-icon-pause" }
             } :
             {
-                label: "Correr",
+                label: Localization.$run,
                 icons: { primary: "ui-icon-play" }
             };
         $(this).button("option", options);

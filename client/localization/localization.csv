@@ -32,3 +32,5 @@ set-4-beepers,4 beepers,4 zumbadores
 set-n-beepers,N beepers... ,N zumbadores... 
 set-inf-beepers,INFINITE beepers,INFINITOS zumbadores
 beepers-question,How many?,¿Cuántos?
+$run,Run,Correr
+$stop,Stop,Correr
