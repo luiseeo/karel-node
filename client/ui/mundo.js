@@ -48,7 +48,7 @@ var mundo = (function () {
                 paredCode = y*200 + x*2 + ori;
                 //console.log(paredCode);
                 if (paredCode > 0) {
-                    if ($("#valvula").attr("checked")) {
+                    if ($("#valve").prop("checked")) {
                         if (this.muros[paredCode] === 0) {
                             this.muros[paredCode] = 1;
                             return true;
