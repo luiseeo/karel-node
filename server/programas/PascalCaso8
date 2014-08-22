@@ -1,0 +1,72 @@
+{
+ Caso prueba 8: Programa avanzado que usa todas las funciones del lenguaje de Karel.
+}
+iniciar-programa
+	define-nueva-instruccion mediavuelta como
+	inicio
+		gira-izquierda;
+		gira-izquierda;
+	fin;
+	define-nueva-instruccion muevemonton como
+	inicio
+		si junto-a-zumbador entonces
+		inicio
+			coge-zumbador;
+			muevemonton;
+			deja-zumbador;
+		fin
+		sino
+			avanza;
+	fin;
+	define-nueva-instruccion ordenapar como
+	inicio
+		si junto-a-zumbador entonces
+		inicio
+			coge-zumbador;
+			avanza;
+			si junto-a-zumbador entonces
+			inicio
+				coge-zumbador;
+				mediavuelta;
+				avanza;
+				mediavuelta;
+				ordenapar;
+				
+				deja-zumbador;
+				avanza;
+				mediavuelta;
+				deja-zumbador;
+				avanza;
+				mediavuelta;
+			fin
+			sino
+			inicio
+				mediavuelta;
+				avanza;
+				mediavuelta;
+				deja-zumbador;
+			fin
+		fin
+		sino
+		inicio
+			avanza;
+			mediavuelta;
+			muevemonton;
+			mediavuelta;
+		fin;
+	fin;
+	inicia-ejecucion
+		repite 5 veces
+		inicio
+			mientras junto-a-zumbador hacer
+			inicio
+				ordenapar;
+				avanza;
+			fin;
+			mediavuelta;
+			mientras frente-libre hacer
+				avanza;
+		fin;
+		apagate;
+	termina-ejecucion
+finalizar-programa

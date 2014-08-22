@@ -1,0 +1,179 @@
+/**
+ * ============
+ * Karel online
+ * ============
+ * Estilos para el GUI de Karel online
+ * 
+ * Autor: Luis Eduardo Enciso
+ */
+
+html,body{
+	margin:0;
+	padding:0;
+	height:100%;width:100%; 
+	overflow: hidden;
+}
+
+body {
+    font:12px/1.231 sans-serif; 
+	min-width:800px;
+}
+select, input, textarea, button { font:99% sans-serif; }
+
+#editor-programa,#editor-ejecucion { 
+	margin: 0;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+#tabs{
+	border:0;
+	margin:2px;
+	padding:0;
+	height:100%;
+}
+
+#tabs section{
+	background-color:#a0a0a0;
+    padding: 0;
+}
+#toolbarMundo input[type='number']{
+	width:50px;
+	text-align:right;
+}
+#toolbarPrograma, #toolbarMundo,#toolbarEjecucion{
+	background-color:#FAFCFC;
+	font-size:85%;
+	padding:10px;
+	position:relative;
+	z-index:2;
+    border-bottom: 1px solid #d0d0d0;
+}
+#tabs .ui-tabs-nav{
+	border-radius:0;
+}
+
+#titulo{
+	color: #f0f0f0;
+	position:absolute;
+	right:40px;
+	top:5px;
+	z-index:1;
+	margin:0;
+	padding:0;
+}
+#titulo span{
+	position:absolute;
+	top:17px;
+	font-size:50%;
+	font-style:italic;
+}
+
+.ftitle{
+	padding:3px !important;
+	cursor:pointer;
+}
+
+.menu{
+	font-size:85% !important;
+	box-shadow:4px 4px 3px #f0f0f0;
+}
+.menu ul{
+	padding:0;
+	margin:0;
+}
+.menu ul li{
+	display:block;
+	padding:3px;
+	list-style:none;
+}
+.menu ul li:hover{
+	cursor:pointer;
+	background-color:#d0e5ff;
+}
+
+#zumbadores-dialog{
+	/*font-size:80% !important;*/
+}
+
+.mueveMundo{
+	height:20px;
+	width:45px;
+	position:relative;
+	top:0px;
+	margin-left:-3px;
+}
+.mueveMundo#mueve-arr{
+	top:-12px;
+}
+.mueveMundo#mueve-aba{
+	top:10px;
+	left:-93px;
+}
+.ace_text-layer{
+	font-family:monospace !important;
+}
+#chooser ul{
+	margin:0;
+	padding:0;
+}
+#chooser li{
+	display:block;
+	padding:4px;
+	margin:3px;
+}
+#chooser li:hover{
+	cursor:pointer;
+	background-color:#87B6D9;
+	color:white;
+}
+
+/*Paredes hover*/
+#pared-vertical, #pared-horizontal {
+	background-color: rgba(0,73,210,0.6);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	display:none;
+	z-index:1;
+	pointer-events:none;
+}
+
+#pared-vertical {
+	width: 5px;
+	height: 35px;
+}
+
+#pared-horizontal {
+	width: 35px;
+	height: 5px;
+}
+
+/*Ayuda*/
+section#ayuda, section#retos{
+	background-color:white;
+	padding:0 20px;
+	overflow:auto;
+}
+
+section#ayuda pre{
+	font-family:monospace;
+	/*font-size:13px;*/
+	border:1px dashed #88a0ff;
+	padding:10px;
+}
+
+/*FONTS*/
+@font-face {
+	font-family: 'PressStartKRegular';
+	src: url('fonts/press-start/prstartk-webfont.eot');
+	src: url('fonts/press-start/prstartk-webfont.eot?#iefix') format('embedded-opentype'),
+		url('fonts/press-start/prstartk-webfont.woff') format('woff'),
+		url('fonts/press-start/prstartk-webfont.ttf') format('truetype'),
+		url('fonts/press-start/prstartk-webfont.svg#PressStartKRegular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}

@@ -1,0 +1,33 @@
+class program{
+
+    program(){
+        while (!nextToABeeper){
+            while (leftIsBlocked && frontIsClear){
+                move();
+            }
+            if (nextToABeeper)
+                turnoff();
+            if (leftIsClear){
+                //buscar la sig. pared izquierda
+                turnleft();
+                move();
+                if (leftIsClear){
+                    turnleft();
+                    move();
+                }
+                else if (frontIsBlocked){
+                    turnleft();
+                    turnleft();
+                    turnleft();
+                }
+            }
+            else if (frontIsBlocked){
+                turnleft();
+                turnleft();
+                turnleft();
+            }
+            
+        }
+		turnoff();
+	}
+}

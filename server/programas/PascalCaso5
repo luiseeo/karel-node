@@ -1,0 +1,25 @@
+{
+ Caso prueba 5: Se prueban los procedimientos. Se ejecutara un procedimiento que manda
+ a llamar a otro procedimiento. Uno de esos procedimientos tendrá un parámetro.
+}
+iniciar-programa
+	define-nueva-instruccion mediavuelta como
+	inicio
+		gira-izquierda;
+		gira-izquierda;
+	fin;
+	define-nueva-instruccion guardia(n) como
+	inicio
+		repite n veces
+		inicio
+			avanza;
+			avanza;
+			mediavuelta;
+		fin;
+	fin;
+	
+	inicia-ejecucion
+		guardia(10);
+		apagate;
+	termina-ejecucion
+finalizar-programa

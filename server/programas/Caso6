@@ -1,0 +1,17 @@
+/**
+ * Caso prueba 6: Se prueba la recursión. Karel deberá avanzar tantas
+ * casillas como zumbadores tenga la casilla inicial.
+ */
+class program{
+    void cuenta(){
+        if (nextToABeeper){
+            pickbeeper();
+            cuenta();
+            move();
+        }
+    }
+    program(){
+        cuenta();
+		turnoff();
+	}
+}

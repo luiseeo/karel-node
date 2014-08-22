@@ -1,0 +1,19 @@
+{
+ Caso prueba 6: Se prueba la recursión. Karel deberá avanzar tantas
+ casillas como zumbadores tenga la casilla inicial.
+}
+iniciar-programa
+	define-nueva-instruccion cuenta como
+	inicio
+		si junto-a-zumbador entonces
+		inicio
+			coge-zumbador;
+			cuenta;
+			avanza;
+		fin;
+	fin;
+	inicia-ejecucion
+		cuenta;
+		apagate;
+	termina-ejecucion
+finalizar-programa

@@ -1,0 +1,9 @@
+{
+ Caso prueba 1: Programa básico. El código solo tiene el esqueleto básico de un programa de Karel.
+ La única instrucción que hará Karel será apagarse.
+}
+iniciar-programa
+	inicia-ejecucion
+		apagate;
+	termina-ejecucion
+finalizar-programa

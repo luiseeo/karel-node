@@ -1,0 +1,135 @@
+#Pascal
+Programa =		"iniciar-programa"
+					( Procedimiento )*
+					"inicia-ejecucion"
+						EstatutoGeneral ( EstatutoGeneral ";" )*
+					"termina-ejecucion"
+				"finalizar-programa".
+
+Procedimiento =	"define-nueva-instruccion" "id" [ "(" "id" ")" ] "como"
+					( Estatuto | Bloque ).
+
+EstatutoGeneral=[Estatuto].
+
+Estatuto=		"apagate"
+				|"gira-izquierda"
+				|"avanza"
+				|"coge-zumbador"
+				|"deja-zumbador"
+				|"sal-de-instruccion"
+				|Llamada
+				|Si
+				|Mientras
+				|Repetir.
+
+Bloque=			"inicio"
+					EstatutoGeneral ( EstatutoGeneral ";" )*
+				"fin".
+
+Llamada=		"id" [ "(" ExpresionEntera ")" ].
+
+Si=				"si" Condicion "entonces"
+					(Estatuto | Bloque)
+				["sino"
+					(Estatuto | Bloque)].
+
+Mientras=		"mientras"	Condicion "hacer"
+					(Estatuto | Bloque).
+
+Repetir=		"repetir" ExpresionEntera "veces"
+					(Estatuto | Bloque).
+
+Condicion=		ClausulaY ( "o" ClausulaY )*.
+
+ClausulaY=		ClausulaNo ( "y" ClausulaNo )*.
+
+ClausulaNo=		[ "no" ] ClausulaAtomica.
+
+ClausulaAtomica="si-es-cero" "(" ExpresionEntera ")"
+				|Booleano
+				|"(" Condicion ")".
+
+ExpresionEntera="decimal"
+				|"id"
+				|"precede" "(" ExpresionEntera ")"
+				|"sucede" "(" ExpresionEntera ")".
+
+Booleano=		"frente-libre"
+				|"frente-bloqueado"
+				|"izquierda-libre"
+				|"izquierda-bloqueada"
+				|"derecha-libre"
+				|"derecha-bloqueada"
+				|"junto-a-zumbador"
+				|"zumbador-en-mochila"
+				|"orientado-al-norte"
+				|"orientado-al-sur"
+				|"orientado-al-este"
+				|"orientado-al-oeste".
+
+
+#Java
+Programa=		"class" "program" "{"
+					( Metodo )*
+					"program" "(" ")"
+						Bloque
+				"}" .
+
+Metodo=			("void" | "define" ) Firma
+					Bloque .
+
+Firma=			"id" "(" [ "id" ] ")" .
+
+Estatuto=		"turnoff" "(" ")" ";"
+				|"turnleft" "(" ")" ";"
+				|"move" "(" ")" ";"
+				|"pickbeeper" "(" ")" ";"
+				|"putbeeper" "(" ")" ";"
+				|"return" "(" ")" ";"
+				|Llamada
+				|If
+				|While
+				|Iterate .
+
+Bloque=			"{" ( Estatuto )* "}" .
+
+Llamada=		"id" "(" [ ExpresionEntera ] ")" ";" .
+
+ExpresionEntera="decimal"
+				|"id"
+				|"pred" "(" ExpresionEntera ")"
+				|"succ" "(" ExpresionEntera ")" .
+
+Condicion=		ClausulaY ( "||" ClausulaY )* .
+
+ClausulaY=		ClausulaNo ( "&&" ClausulaNo )* .
+
+ClausulaNo=		[ "!" ] ClausulaAtomica .
+
+ClausulaAtomica="iszero" "(" ExpresionEntera ")"
+				|Booleano
+				|"(" Condicion ")" .
+
+If=				"if" "(" Condicion ")"
+					(Bloque | Estatuto)
+				["else"
+					(Bloque | Estatuto)] .
+
+While=			"while" "(" Condicion ")"
+					(Bloque | Estatuto) .
+
+Iterate=		"iterate" "(" ExpresionEntera ")"
+					(Bloque | Estatuto) .
+
+Booleano=		"frontIsClear"
+				|"frontIsBlocked"
+				|"leftIsClear"
+				|"leftIsBlocked"
+				|"rightIsClear"
+				|"rightIsBlocked"
+				|"nextToABeeper"
+				|"beepersInBag"
+				|"facingNorth"
+				|"facingSouth"
+				|"facingEast"
+				|"facingWest" .

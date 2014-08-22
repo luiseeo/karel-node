@@ -114,6 +114,16 @@ var SampleApp = function() {
     self.initializeServer = function() {
         self.createRoutes();
         self.app = express.createServer();
+        
+        /*var staticFolders = ['ace-src', 'doc', 'img', 'public'];
+        for (var i = 0; i < staticFolders.length; i++) {
+            var folderPath = '/' + staticFolders[i];
+            self.app.use(folderPath, express.static(staticFolders[i]));
+        }*/
+        //self.app.use("/public", express.static("public"));
+        self.app.use(express.static("client"));
+        self.app.use("/server/mundos", express.static("server/mundos"));
+        self.app.use("/server/programas", express.static("server/programas"));
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {

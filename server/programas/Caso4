@@ -1,0 +1,72 @@
+/**
+ * Caso prueba 4: Se prueban las condiciones. Karel ira avanzando de casilla
+ * por casilla y en cada casilla verificará una condición, dejara un zumbador
+ * si la condición es verdadera.
+ */
+class program{
+	program(){
+        if (leftIsClear)
+            putbeeper();
+        move();
+        if (leftIsBlocked)
+            putbeeper();
+        move();
+        if (rightIsClear)
+            putbeeper();
+        move();
+        if (rightIsBlocked)
+            putbeeper();
+        move();
+        if (frontIsClear)
+            putbeeper();
+        move();
+        
+        if (frontIsBlocked)
+            putbeeper();
+        move();
+        if (iszero(0))
+            putbeeper();
+        move();
+        if (iszero(5))
+            putbeeper();
+        move();
+        if (iszero(pred(1)))
+            putbeeper();
+        move();
+        if (beepersInBag)
+            putbeeper();
+        move();
+        
+        if (nextToABeeper)
+            putbeeper();
+        move();
+        if (facingNorth)
+            putbeeper();
+        move();
+        if (facingEast)
+            putbeeper();
+        move();
+        if (facingWest)
+            putbeeper();
+        move();
+        if (facingSouth)
+            putbeeper();
+        move();
+        
+        if (facingNorth && beepersInBag && frontIsClear)
+            putbeeper();
+        move();
+        if (iszero(8) || frontIsBlocked || facingNorth)
+            putbeeper();
+        move();
+        if (facingNorth && (iszero(123) || nextToABeeper))
+            putbeeper();
+        move();
+        //resultados esperados en mundo por default con 100 zumbadores en la mochila
+        //no,si,si,no,si
+        //no,si,no,si,si
+        //no,si,no,no,no
+        //si,si,no
+		turnoff();
+	}
+}

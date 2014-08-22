@@ -1,0 +1,21 @@
+{
+ Caso prueba 7: Se prueba el uso de sucede y precede. Karel deberá avanzar
+ tantas casillas como zumbadores tenga la casilla inicial.
+}
+iniciar-programa
+	define-nueva-instruccion cuenta(n) como
+	inicio
+		si junto-a-zumbador entonces
+		inicio
+			coge-zumbador;
+			cuenta(sucede(n));
+		fin
+		sino
+			repite n veces
+				avanza;
+	fin;
+	inicia-ejecucion
+		cuenta(0);
+		apagate;
+	termina-ejecucion
+finalizar-programa

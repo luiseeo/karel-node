@@ -1,0 +1,60 @@
+class program{
+    void faceNorth() {
+        while (!facingNorth) {
+            turnleft();
+        }
+    }
+    void rellena() {
+        if (!nextToABeeper) {
+            faceNorth();
+            putbeeper();
+            if (frontIsClear) {
+                move();
+                rellena();
+                
+                while (!facingSouth) turnleft();
+                move();
+                turnleft();
+                turnleft();
+            }
+            turnleft();
+            
+            if (frontIsClear) {
+                move();
+                rellena();
+                
+                while (!facingEast) turnleft();
+                move();
+                turnleft();
+                turnleft();
+            }
+            turnleft();
+            
+            if (frontIsClear) {
+                move();
+                rellena();
+                
+                while (!facingNorth) turnleft();
+                move();
+                turnleft();
+                turnleft();
+            }
+            turnleft();
+            
+            if (frontIsClear) {
+                move();
+                rellena();
+                
+                while (!facingWest) turnleft();
+                move();
+                turnleft();
+                turnleft();
+            }
+            turnleft();
+        }
+    }
+    program() {
+        rellena();
+        turnoff();
+    }
+}

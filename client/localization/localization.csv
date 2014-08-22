@@ -1,0 +1,34 @@
+#id,English,Spanish
+tab-world,World,Mundo
+tab-code,Code,Programa
+tab-run,Run,Ejecutar
+tab-help,Help,Ayuda
+beepers-label,Beepers in bag:,Zumbadores en la mochila:
+infinite-label,Infinite,Infinito
+valve-label,Activate valves,Activar válvulas
+new-world,New,Nuevo
+open-world,Open,Abrir
+save-world,Save,Guardar
+save-as-world,Save as... ,Guardar como... 
+new-program,New,Nuevo
+open-program,Open,Abrir
+save-program,Save,Guardar
+save-as-program,Save as... ,Guardar como... 
+compile,Compile,Compilar
+initialize,Initialize,Inicializar
+step,Step,Adelante
+run,Run,Correr
+delay-label,Delay:,Retraso:
+beepers-label2,Beepers in bag:,Zumbadores en la mochila:
+cell-karel-north,Karel facing North,Karel al Norte
+cell-karel-east,Karel facing East,Karel al Este
+cell-karel-south,Karel facing South,Karel al Sur
+cell-karel-west,Karel facing West,Karel al Oeste
+set-0-beepers,0 beepers,0 zumbadores
+set-1-beepers,1 beeper,1 zumbador
+set-2-beepers,2 beepers,2 zumbadores
+set-3-beepers,3 beepers,3 zumbadores
+set-4-beepers,4 beepers,4 zumbadores
+set-n-beepers,N beepers... ,N zumbadores... 
+set-inf-beepers,INFINITE beepers,INFINITOS zumbadores
+beepers-question,How many?,¿Cuántos?

@@ -1,0 +1,19 @@
+/**
+ * Caso prueba 7: Se prueba el uso de sucede y precede. Karel deberá avanzar
+ * tantas casillas como zumbadores tenga la casilla inicial.
+ */
+class program{
+    void cuenta(n){
+        if (nextToABeeper){
+            pickbeeper();
+            cuenta(succ(n));
+        }
+        else
+            iterate (n)
+                move();
+    }
+	program(){
+        cuenta(0);
+		turnoff();
+	}
+}

@@ -1,0 +1,29 @@
+class program{
+    void multiplica2(x){
+        if (nextToABeeper){
+            pickbeeper();
+            multiplica2(x);
+            iterate (x){
+                putbeeper();
+            }
+        }
+        else{
+            move();
+        }
+    }
+    void multiplica(x){
+        if (nextToABeeper){
+            pickbeeper();
+            multiplica(succ(x));
+        }
+        else{
+            move();
+            multiplica2(x);
+        }
+    }
+    
+	program(){
+        multiplica(0);
+		turnoff();
+	}
+}

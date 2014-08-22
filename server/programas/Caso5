@@ -1,0 +1,21 @@
+/**
+ * Caso prueba 5: Se prueban los procedimientos. Se ejecutara un procedimiento que manda
+ * a llamar a otro procedimiento. Uno de esos procedimientos tendrá un parámetro.
+ */
+class program{
+    void mediavuelta(){
+        turnleft();
+        turnleft();
+    }
+    void guardia(n){
+        iterate (n){
+            move();
+            move();
+            mediavuelta();
+        }
+    }
+	program(){
+        guardia(10);
+		turnoff();
+	}
+}

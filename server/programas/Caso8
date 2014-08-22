@@ -1,0 +1,63 @@
+/**
+ * Caso prueba 8: Programa avanzado que usa todas las funciones del lenguaje de Karel.
+ */
+class program{
+    void mediavuelta(){
+        turnleft();
+        turnleft();
+    }
+    void muevemonton(){
+        if (nextToABeeper){
+            pickbeeper();
+            muevemonton();
+            putbeeper();
+        }
+        else
+            move();
+    }
+    void ordenaPar(){
+        if (nextToABeeper){
+            pickbeeper();
+            move();
+            if (nextToABeeper){
+                pickbeeper();
+                mediavuelta();
+                move();
+                mediavuelta();
+                ordenaPar();
+                
+                putbeeper();
+                move();
+                mediavuelta();
+                putbeeper();
+                move();
+                mediavuelta();
+            }
+            else{
+                mediavuelta();
+                move();
+                mediavuelta();
+                putbeeper();
+            }
+        }
+        else{
+            move();
+            mediavuelta();
+            muevemonton();
+            mediavuelta();
+        }
+    }
+	program(){
+        iterate (5){
+            while (nextToABeeper){
+                ordenaPar();
+                move();
+            }
+            mediavuelta();
+            while (frontIsClear)
+                move();
+            mediavuelta();
+        }
+		turnoff();
+	}
+}

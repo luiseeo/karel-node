@@ -1,0 +1,72 @@
+{
+ Caso prueba 4: Se prueban las condiciones. Karel ira avanzando de casilla
+ por casilla y en cada casilla verificará una condición, dejara un zumbador
+ si la condición es verdadera.
+}
+iniciar-programa
+    inicia-ejecucion
+		si izquierda-libre entonces
+			deja-zumbador;
+		avanza;
+		si izquierda-bloqueada entonces
+			deja-zumbador;
+		avanza;
+		si derecha-libre entonces
+			deja-zumbador;
+		avanza;
+		si derecha-bloqueada entonces
+			deja-zumbador;
+		avanza;
+		si frente-libre entonces
+			deja-zumbador;
+		avanza;
+		
+		si frente-bloqueado entonces
+			deja-zumbador;
+		avanza;
+		si es-cero(0) entonces
+			deja-zumbador;
+		avanza;
+		si es-cero(5) entonces
+			deja-zumbador;
+		avanza;
+		si es-cero(precede(1)) entonces
+			deja-zumbador;
+		avanza;
+		si zumbador-en-mochila entonces
+			deja-zumbador;
+		avanza;
+		
+		si junto-a-zumbador entonces
+			deja-zumbador;
+		avanza;
+		si orientado-al-norte entonces
+			deja-zumbador;
+		avanza;
+		si orientado-al-este entonces
+			deja-zumbador;
+		avanza;
+		si orientado-al-oeste entonces
+			deja-zumbador;
+		avanza;
+		si orientado-al-sur entonces
+			deja-zumbador;
+		avanza;
+		
+		si orientado-al-norte y zumbador-en-mochila y no frente-bloqueado entonces
+			deja-zumbador;
+		avanza;
+		si es-cero(8) o frente-bloqueado o orientado-al-norte entonces
+			deja-zumbador;
+		avanza;
+		si orientado-al-norte y (es-cero(123) o junto-a-zumbador) entonces
+			deja-zumbador;
+		avanza;
+	//resultados esperados en mundo por default con 100 zumbadores en la mochila
+        //no,si,si,no,si
+       // no,si,no,si,si
+       // no,si,no,no,no
+        //si,si,no
+		apagate;
+	termina-ejecucion
+finalizar-programa

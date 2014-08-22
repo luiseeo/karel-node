@@ -1,0 +1,15 @@
+{
+ Caso prueba 2: Se prueban las funciones para controlar a Karel. En secuencia, Karel avanza,
+ recoge un zumbador, gira a la izquierda 3 veces, avanza y deja un zumbador.
+}
+iniciar-programa
+	inicia-ejecucion
+		avanza;
+		coge-zumbador;
+		gira-izquierda;
+		gira-izquierda;
+		avanza;
+		deja-zumbador;
+		apagate;
+	termina-ejecucion
+finalizar-programa

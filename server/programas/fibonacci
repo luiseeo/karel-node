@@ -1,0 +1,45 @@
+class program{
+    void copia(n){
+        if (nextToABeeper){
+            pickbeeper();
+            copia(n);
+            putbeeper();
+            turnleft();
+            turnleft();
+            iterate (n)
+                move();
+            turnleft();
+            turnleft();
+            putbeeper();
+            iterate (n)
+                move();
+        }
+        else{
+            iterate (n)
+                move();
+        }
+    }
+    program(){
+        putbeeper();
+        move();
+        putbeeper();
+        move();
+        iterate (12){
+            turnleft();
+            turnleft();
+            move();
+            move();
+            turnleft();
+            turnleft();
+            copia(2);
+            turnleft();
+            turnleft();
+            move();
+            turnleft();
+            turnleft();
+            copia(1);
+            move();
+        }
+		turnoff();
+	}
+}

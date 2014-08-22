@@ -1,0 +1,17 @@
+{
+ Caso prueba 3: Se prueban los estatutos de control. Primero recoge zumbadores mientras existan,
+ luego repite 3 veces girar a la izquierda, finalmente avanza si está el frente libre.
+}
+iniciar-programa
+    inicia-ejecucion
+		mientras junto-a-zumbador hacer
+			coge-zumbador;
+		repite 3 veces
+			gira-izquierda;
+		si frente-libre entonces
+			avanza
+		sino
+			gira-izquierda;
+		apagate;
+	termina-ejecucion
+finalizar-programa
