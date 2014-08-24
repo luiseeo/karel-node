@@ -593,7 +593,7 @@ KAREL.compilador = (function () {
             maquinavirtual.mode = maquinavirtual.karelmodes.ready;
             return;
         }
-        maquinavirtual.mode = maquinavirtual.karelmodes.running;			
+        maquinavirtual.mode = maquinavirtual.karelmodes.running;
         
         animationRequest = requestAnimationFrame(aniStep);
     }
