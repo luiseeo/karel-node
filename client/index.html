@@ -14,9 +14,8 @@
 	<script type="text/javascript" src="jquery/flexigrid.pack.js"></script>
 	<script type="text/javascript" src="jquery/jquery-ui-1.11.0.min.js"></script>
 	<!-- Karel gráfico (cosas de canvas)-->
-    
 	<script type="text/javascript" src="ui/init.js"></script>
-    <script type="text/javascript" src="localization/localization.english.js"></script>
+	<script type="text/javascript" src="localization/localization.english.js"></script>
 	<script type="text/javascript" src="ui/karelDraw.js"></script>
 	<script type="text/javascript" src="ui/mundo.js"></script>
 	<!-- Ace editor -->
@@ -26,7 +25,7 @@
 	<script type="text/javascript" src="ace-src/theme-capek.js" charset="utf-8"></script>
 	<!--script type="text/javascript" src="src/mode-javakarel.js" charset="utf-8"></script-->
 	<script type="text/javascript" src="ace-src/mode-pascalkarel.js" charset="utf-8"></script>
-    <script type="text/javascript" src="ace-src/mode-karel.js" charset="utf-8"></script>
+	<script type="text/javascript" src="ace-src/mode-karel.js" charset="utf-8"></script>
 	<!-- compilador -->
 	<script type="text/javascript" src="parser/javakarel.js"> </script>
 	<script type="text/javascript" src="parser/paskarel.js"> </script>
@@ -44,21 +43,23 @@
 			<!--li><a href="#retos">Retos</a></li-->
 		</ul>
 		<section id="mundo" style="position:relative;"  oncontextmenu="return false;">
-			<div id="toolbarMundo">
-				<span id="beepers-label">_Zumbadores en la mochila:_</span>
-				<input type="number" id="en-mochila" value="0" min="0" max="65534" autocomplete="off" onchange="mundo.zumbadores.enMochila=Number(this.value);"/>
-				<input type="checkbox" id="infinite"/><label id="infinite-label" for="infinite">_Infinito_</label>
-				<input type="checkbox" id="valve"/><label id="valve-label" for="valve">_Activar válvulas_</label>
-				<button id="new-world">_Nuevo_</button>
-				<button id="open-world">_Abrir_</button>
-				<button id="save-world">_Guardar_</button>
-				<button id="save-as-world">_Guardar como..._</button>
-				
-				&nbsp;&nbsp;&nbsp;
-				<button class="mueveMundo" id="mueve-izq">a</button>
-				<button class="mueveMundo" id="mueve-arr">w</button>
-				<button class="mueveMundo" id="mueve-der">d</button>
-				<button class="mueveMundo" id="mueve-aba">s</button>
+			<div class="toolbar-container">
+				<div id="toolbar-mundo">
+					<span id="beepers-label">_Zumbadores en la mochila:_</span>
+					<input type="number" id="en-mochila" value="0" min="0" max="65534" autocomplete="off" onchange="mundo.zumbadores.enMochila=Number(this.value);"/>
+					<input type="checkbox" id="infinite"/><label id="infinite-label" for="infinite">_Infinito_</label>
+					<input type="checkbox" id="valve"/><label id="valve-label" for="valve">_Activar válvulas_</label>
+					<button id="new-world">_Nuevo_</button>
+					<button id="open-world">_Abrir_</button>
+					<button id="save-world">_Guardar_</button>
+					<button id="save-as-world">_Guardar como..._</button>
+					
+					&nbsp;&nbsp;&nbsp;
+					<button class="mueveMundo" id="mueve-izq">a</button>
+					<button class="mueveMundo" id="mueve-arr">w</button>
+					<button class="mueveMundo" id="mueve-der">d</button>
+					<button class="mueveMundo" id="mueve-aba">s</button>
+				</div>
 			</div>
 			<div style="position:relative">
 				<canvas id="edicion-mundo" width="1000" height="600"></canvas>
@@ -90,28 +91,30 @@
 			</div>
 		</section>
 		<section id="programa">
-			<div id="toolbarPrograma">
-				<span id="lenguaje">
-					<input type="radio" id="pascal" name="lenguaje" checked="checked" /><label for="pascal">Pascal</label>
-					<input type="radio" id="java" name="lenguaje" /><label for="java">Java</label>
-				</span>
+			<div class="toolbar-container">
+				<div id="toolbar-programa">
+					<span id="lenguaje">
+						<input type="radio" id="pascal" name="lenguaje" checked="checked" /><label for="pascal">Pascal</label>
+						<input type="radio" id="java" name="lenguaje" /><label for="java">Java</label>
+					</span>
 
-                <span id="zoom-tools">
-                    <button id="zoom-in">&nbsp;</button>
-                    <button id="zoom-out">&nbsp;</button>
-                </span>
+					<span id="zoom-tools">
+						<button id="zoom-in">&nbsp;</button>
+						<button id="zoom-out">&nbsp;</button>
+					</span>
 
-				<button id="new-program">_Nuevo_</button>
-				<button id="open-program">_Abrir_</button>
-				<button id="save-program">_Guardar_</button>
-				<button id="save-as-program">_Guardar como..._</button>
-				<button id="compile">_Compilar_</button>
+					<button id="new-program">_Nuevo_</button>
+					<button id="open-program">_Abrir_</button>
+					<button id="save-program">_Guardar_</button>
+					<button id="save-as-program">_Guardar como..._</button>
+					<button id="compile">_Compilar_</button>
+				</div>
 			</div>
 			<pre id="editor-programa" style="position:relative;">class program{
-    program() {
-        
-        turnoff();
-    }
+	program() {
+		
+		turnoff();
+	}
 }</pre>
 			<div id="errores">
 				<table id="tabla-errores">
@@ -132,22 +135,24 @@
 				<ul>
 					<li onclick="KAREL.utils.abrirMundo('ciudad.txt');">Ciudad</li>
 					<li onclick="KAREL.utils.abrirMundo('escalera.txt');">Escalera</li>
-                    <li onclick="KAREL.utils.abrirMundo('carita.txt');">Carita</li>
-                    <li onclick="KAREL.utils.abrirMundo('laberinto.txt');">Laberinto</li>
-                    <li onclick="KAREL.utils.abrirPrograma('laberinto.txt');">Laberinto JSK</li>
+					<li onclick="KAREL.utils.abrirMundo('carita.txt');">Carita</li>
+					<li onclick="KAREL.utils.abrirMundo('laberinto.txt');">Laberinto</li>
+					<li onclick="KAREL.utils.abrirPrograma('laberinto.txt');">Laberinto JSK</li>
 				</ul>
 			</div>
 		</section>
 		<section id="ejecutar" style="position:relative;">
-			<div id="toolbarEjecucion">
-				<button id="initialize">_Inicializar_</button>
-				<button id="step">_Adelante_</button>
-				<button id="run">_Correr_</button>
-				<label id="delay-label" for="amount">_Retraso:_</label>
-				<div style="display:inline-block;width:250px;top:2px;" id="slider-retraso"></div>
-                <span id="delay" style="border:0;color:#ff0084; font-weight:bold;width:50px;">_0_</span>
-				<label id="beepers-label2">_Zumbadores en la mochila:_</label>
-				<span id="zumbadores-ejecucion" style="color:#ff0084; font-weight:bold;width:50px;font-size:17px;">0</span>
+			<div class="toolbar-container">
+				<div id="toolbar-ejecucion">
+					<button id="initialize">_Inicializar_</button>
+					<button id="step">_Adelante_</button>
+					<button id="run">_Correr_</button>
+					<label id="delay-label" for="amount">_Retraso:_</label>
+					<div style="display:inline-block;width:250px;top:2px;" id="slider-retraso"></div>
+					<span id="delay" style="border:0;color:#ff0084; font-weight:bold;width:50px;">_0_</span>
+					<label id="beepers-label2">_Zumbadores en la mochila:_</label>
+					<span id="zumbadores-ejecucion" style="color:#ff0084; font-weight:bold;width:50px;font-size:17px;">0</span>
+				</div>
 			</div>
 			<div style="position:relative" oncontextmenu="return false;">
 				<div id="tapon" style="position:absolute;width:334px;background-color:rgba(0,0,255,0.01);z-index:3;">&nbsp;</div>

@@ -70,7 +70,7 @@ KAREL.utils = (function () {
         switch (activeTab) {
             case "tab-world":
                 //el tamaño del canvas editor de mundo, NOTE: no puede hacerse con $().width ó $().height
-                mundoElement.height = $('#tabs section').height() - $('#toolbarMundo').outerHeight(true);
+                mundoElement.height = $('#tabs section').height() - $('#toolbar-mundo').outerHeight(true);
                 mundoElement.width = $('#tabs section').width();
                 layerParedesMundo.height = mundoElement.height;
                 layerParedesMundo.width = mundoElement.width;
@@ -83,15 +83,15 @@ KAREL.utils = (function () {
                 erroresSize = (this.showError) ?
                     $('#errores').outerHeight(true) :
                     $('.ftitle').outerHeight(true);
-                $('#editor-programa').height($('#tabs section').height() - $('#toolbarPrograma').outerHeight(true) - erroresSize);
+                $('#editor-programa').height($('#tabs section').height() - $('#toolbar-programa').outerHeight(true) - erroresSize);
                 this.editorPrograma.resize();
                 break;
             case "tab-run":
                 //el tamaño del editor en ejecucion
-                $('#editor-ejecucion').height($('#tabs section').height() - $('#toolbarEjecucion').outerHeight(true));
+                $('#editor-ejecucion').height($('#tabs section').height() - $('#toolbar-ejecucion').outerHeight(true));
                 this.editorEjecucion.resize();
                 //tamaño del canvas de ejecucion
-                mundoEjecucion.height = $('#tabs section').height() - $('#toolbarEjecucion').outerHeight(true);
+                mundoEjecucion.height = $('#tabs section').height() - $('#toolbar-ejecucion').outerHeight(true);
                 mundoEjecucion.width = $('#tabs section#ejecutar').width() - $('#editor-ejecucion').width();
                 layerParedesEjecucion.height = mundoEjecucion.height;
                 layerParedesEjecucion.width = mundoEjecucion.width;
@@ -696,34 +696,34 @@ $(document).ready(function() {
     });
     
     //botones en pestaña "Mundo"
-    $("#toolbarMundo button#new-world").button(icon('document')).click(WF(Utils.nuevoMundo));
-    $("#toolbarMundo button#open-world").button(icon('folder-open')).click(WF(Utils.showMundoChooser));
-    $("#toolbarMundo button#save-world").button(icon('disk')).click(WF(Utils.guardarMundo));
-    $("#toolbarMundo button#save-as-world").button(icon('disk')).click(WF(Utils.guardarComoMundo));
-    $("#toolbarMundo input#infinite").button(icon('link'));
-    $("#toolbarMundo input#valve").button(icon('transfer-e-w'));
-    $("#toolbarMundo button#mueve-izq").button(icon('arrowthick-1-w')).click(WF(Utils.panIzq));
-    $("#toolbarMundo button#mueve-arr").button(icon('arrowthick-1-n')).click(WF(Utils.panArr));
-    $("#toolbarMundo button#mueve-aba").button(icon('arrowthick-1-s')).click(WF(Utils.panAba));
-    $("#toolbarMundo button#mueve-der").button(icon('arrowthick-1-e')).click(WF(Utils.panDer));
+    $("#toolbar-mundo button#new-world").button(icon('document')).click(WF(Utils.nuevoMundo));
+    $("#toolbar-mundo button#open-world").button(icon('folder-open')).click(WF(Utils.showMundoChooser));
+    $("#toolbar-mundo button#save-world").button(icon('disk')).click(WF(Utils.guardarMundo));
+    $("#toolbar-mundo button#save-as-world").button(icon('disk')).click(WF(Utils.guardarComoMundo));
+    $("#toolbar-mundo input#infinite").button(icon('link'));
+    $("#toolbar-mundo input#valve").button(icon('transfer-e-w'));
+    $("#toolbar-mundo button#mueve-izq").button(icon('arrowthick-1-w')).click(WF(Utils.panIzq));
+    $("#toolbar-mundo button#mueve-arr").button(icon('arrowthick-1-n')).click(WF(Utils.panArr));
+    $("#toolbar-mundo button#mueve-aba").button(icon('arrowthick-1-s')).click(WF(Utils.panAba));
+    $("#toolbar-mundo button#mueve-der").button(icon('arrowthick-1-e')).click(WF(Utils.panDer));
     $("#menu").on({ "contextmenu": function (e) { e.preventDefault(); } });
     
     //botones en pestaña "Programa"
-    $("#toolbarPrograma #lenguaje #java").prop("checked","checked");
-    $("#toolbarPrograma #lenguaje").buttonset().click(WF(Utils.toggleLenguaje));
-    $("#toolbarPrograma #zoom-tools").buttonset();
-    $("#toolbarPrograma button#zoom-in").button(noTextIcon('zoomin', 'Text zoom-in')).click(WF(Utils.zoomIn));
-    $("#toolbarPrograma button#zoom-out").button(noTextIcon('zoomout', 'Text zoom-out')).click(WF(Utils.zoomOut));
-    $("#toolbarPrograma button#new-program").button(icon('document')).click(WF(Utils.nuevoPrograma));
-    $("#toolbarPrograma button#open-program").button(icon('folder-open')).click(WF(Utils.showProgramChooser));
-    $("#toolbarPrograma button#save-program").button(icon('disk')).click(WF(Utils.guardarPrograma));
-    $("#toolbarPrograma button#save-as-program").button(icon('disk')).click(WF(Utils.guardarComoPrograma));
-    $("#toolbarPrograma button#compile").button(icon('circle-triangle-e')).click(WC(Compilador.compile));
+    $("#toolbar-programa #lenguaje #java").prop("checked","checked");
+    $("#toolbar-programa #lenguaje").buttonset().click(WF(Utils.toggleLenguaje));
+    $("#toolbar-programa #zoom-tools").buttonset();
+    $("#toolbar-programa button#zoom-in").button(noTextIcon('zoomin', 'Text zoom-in')).click(WF(Utils.zoomIn));
+    $("#toolbar-programa button#zoom-out").button(noTextIcon('zoomout', 'Text zoom-out')).click(WF(Utils.zoomOut));
+    $("#toolbar-programa button#new-program").button(icon('document')).click(WF(Utils.nuevoPrograma));
+    $("#toolbar-programa button#open-program").button(icon('folder-open')).click(WF(Utils.showProgramChooser));
+    $("#toolbar-programa button#save-program").button(icon('disk')).click(WF(Utils.guardarPrograma));
+    $("#toolbar-programa button#save-as-program").button(icon('disk')).click(WF(Utils.guardarComoPrograma));
+    $("#toolbar-programa button#compile").button(icon('circle-triangle-e')).click(WC(Compilador.compile));
     
     //botones en pestaña "Ejecutar"
-    $("#toolbarEjecucion button#initialize").button(icon('seek-first')).click(WC(Compilador.initialize));
-    $("#toolbarEjecucion button#step").button(icon('seek-next')).click(WC(Compilador.step));
-    $("#toolbarEjecucion button#run").button(icon('play')).click(function() {
+    $("#toolbar-ejecucion button#initialize").button(icon('seek-first')).click(WC(Compilador.initialize));
+    $("#toolbar-ejecucion button#step").button(icon('seek-next')).click(WC(Compilador.step));
+    $("#toolbar-ejecucion button#run").button(icon('play')).click(function() {
         var options = ( $(this).text() === Localization.$run ) ?
             {
                 label: Localization.$stop,

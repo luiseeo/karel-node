@@ -87,9 +87,18 @@ KAREL.drawing = (function () {
         };
     }
     
+    var _tabsNav = null;
+    function tabNavSingleton() {
+        if (_tabsNav === null) {
+            _tabsNav = $("ul.ui-tabs-nav")
+        }
+        return _tabsNav;
+    }
+    
     function Drawer (canvasFondo, canvasParedes, readonly) {
         var Drawing = KAREL.drawing,
-            Localization = KAREL.localization;
+            Localization = KAREL.localization,
+            $toolbarMundo = $("#toolbar-mundo").parent();
         this.mundo = mundo;
         this.canvas = document.getElementById(canvasFondo);
         this.paredesLayer = document.getElementById(canvasParedes);
@@ -104,8 +113,7 @@ KAREL.drawing = (function () {
         //Los mundos editables tienen event listeners par mousedown y mouseover
         if (!this.readonly) {
             this.paredesLayer.addEventListener("mousedown", function (e) {
-                //TODO cachar los DOMs
-                var offsetTop = $("#toolbarMundo").outerHeight(true) + $("ul.ui-tabs-nav").outerHeight(true),
+                var offsetTop = $toolbarMundo.outerHeight(true) + tabNavSingleton().outerHeight(true),
                     coorX = e.pageX - this.offsetLeft + mundo.pan[0],
                     coorY = this.height - (e.pageY - offsetTop) + mundo.pan[1],
                     franjaX = 0,
@@ -157,8 +165,7 @@ KAREL.drawing = (function () {
             }, false);
             
             this.paredesLayer.addEventListener("mousemove", function(e) {
-                //TODO cachar los DOMs
-                var offsetTop = $('#toolbarMundo').outerHeight(true) + $('ul.ui-tabs-nav').outerHeight(true),
+                var offsetTop = $toolbarMundo.outerHeight(true) + tabNavSingleton().outerHeight(true),
                     coorX = e.pageX-this.offsetLeft + mundo.pan[0],
                     coorY = this.height - (e.pageY - offsetTop) + mundo.pan[1],
                     franjaX = 0,
