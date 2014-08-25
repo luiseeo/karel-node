@@ -34,3 +34,23 @@ set-inf-beepers,INFINITE beepers,INFINITOS zumbadores
 beepers-question,How many?,¿Cuántos?
 $run,Run,Correr
 $stop,Stop,Correr
+$chooseWorld,Choose a world,Escoge un mundo
+$chooseProgram,Choose a program,Escoge un programa
+$editCellTitle,Edit cell,Editar casilla
+$lineNumberColumn,Line #,# Línea
+$compileTableTitle,Compile errors,Errores de compilación
+$descriptionColumn,Description,Descripción
+$placeBeepersTitle,Place beepers,Colocar zumbadores
+$compileSuccessTitle,Compile suceeded,Compilación correcta
+$compileSuccessMsg,The program was compiled successfully,Programa compilado exitosamente
+$compileSuccessRow,Compile suceeded!,¡Compilación exitosa!
+$executionFinish,Execution finished normally,Ejecución finalizada. Terminación normal
+$errorNoWorldOpened,There's no world opened yet,No se ha abierto ningún mundo
+$errorNoProgramOpened,There's no program opened yet,No se ha abierto ningún programa
+$errorMaxBeeperCount,The maximum allowed value is 100,El  máximo valor posible es 100
+$errorNegativeCount,Only positive numbers are allowed,Sólo son válidos números enteros positivos
+$errorCompilation,Compile errors found,Hubo errores de compilación
+$errorNoCompiled,There's no compiled program to run,No hay un programa compilado para correr
+$errorWallCrash,Karel crashed into a wall!,Karel quiso pasar sobre una pared!
+$errorPutBeeper,Karel tried to put a beeper... but his bag was empty!,Karel quiso dejar un zumbador pero tenía la mochila vacía!
+$errorPickBeeper,Karel tried to pick a beeper... but there was none!,Karel quiso coger un zumbador pero no había!

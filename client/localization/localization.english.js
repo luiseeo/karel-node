@@ -134,5 +134,25 @@ KAREL.localization = {
         }
     ],
     "$run": "Run",
-    "$stop": "Stop"
+    "$stop": "Stop",
+    "$chooseWorld": "Choose a world",
+    "$chooseProgram": "Choose a program",
+    "$editCellTitle": "Edit cell",
+    "$lineNumberColumn": "Line #",
+    "$compileTableTitle": "Compile errors",
+    "$descriptionColumn": "Description",
+    "$placeBeepersTitle": "Place beepers",
+    "$compileSuccessTitle": "Compile suceeded",
+    "$compileSuccessMsg": "The program was compiled successfully",
+    "$compileSuccessRow": "Compile suceeded!",
+    "$executionFinish": "Execution finished normally",
+    "$errorNoWorldOpened": "There's no world opened yet",
+    "$errorNoProgramOpened": "There's no program opened yet",
+    "$errorMaxBeeperCount": "The maximum allowed value is 100",
+    "$errorNegativeCount": "Only positive numbers are allowed",
+    "$errorCompilation": "Compile errors found",
+    "$errorNoCompiled": "There's no compiled program to run",
+    "$errorWallCrash": "Karel crashed into a wall!",
+    "$errorPutBeeper": "Karel tried to put a beeper... but his bag was empty!",
+    "$errorPickBeeper": "Karel tried to pick a beeper... but there was none!"
 }

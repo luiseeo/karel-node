@@ -25,7 +25,8 @@ KAREL.utils = (function () {
         layerParedesEjecucion,
         javaRadio,
         modePascal,
-        modeJava;
+        modeJava,
+        Localization;
     
     //inicializaciones a hacer una vez que este listo el DOM
     $(document).ready(function () {
@@ -40,6 +41,7 @@ KAREL.utils = (function () {
         mundoEjecucion = document.getElementById('ejecucion-mundo');
         layerParedesEjecucion = document.getElementById('ejecucion-layer-paredes');
         javaRadio = $("#lenguaje #java");
+        Localization = KAREL.localization;
         //cargar el editor de texto
         Utils.editorPrograma = ace.edit("editor-programa");
         Utils.editorPrograma.setTheme("ace/theme/capek");
@@ -148,9 +150,9 @@ KAREL.utils = (function () {
             $("#chooser").html(response);
         });
         $("#chooser").dialog({
-            title:"Escoge un mundo",
+            title: Localization.$chooseWorld,
             resizable:false,
-            height:180,
+            height:220,
             model:true
         });
     }
@@ -159,9 +161,9 @@ KAREL.utils = (function () {
             $("#chooser").html(response);
         });
         $("#chooser").dialog({
-            title:"Escoge un programa",
+            title: Localization.$chooseProgram,
             resizable:false,
-            height:180,
+            height:220,
             modal:true
         });
     }
@@ -192,7 +194,7 @@ KAREL.utils = (function () {
     }
     function guardarMundo() {
         if (nombreMundo === undefined){
-            showMessageBox("Error","No se ha abierto ningún mundo todavía","");
+            showMessageBox("Error",Localization.$errorNoWorldOpened,"");
             return;
         }
         $.post("server/subirMundo.php",{
@@ -283,7 +285,7 @@ KAREL.utils = (function () {
     }
     function guardarPrograma(){
         if (nombrePrograma === undefined){
-            Utils.showMessageBox("Error", "No se ha abierto ningún programa todavía", "");
+            Utils.showMessageBox("Error", Localization.$errorNoWorldOpened, "");
             return;
         }
         $.post("server/subirPrograma.php", {
@@ -291,7 +293,7 @@ KAREL.utils = (function () {
                 codigo: editorPrograma.getSession().getValue()
             }, function(response){
                 if (response=="fail")
-                    showMessageBox("Error","Hubo un error al intentar guardar el programa","");
+                    showMessageBox("Error",Localization.$errorNoProgramOpened,"");
             }
         );
     }
@@ -369,8 +371,9 @@ KAREL.utils = (function () {
     //Mostrar un dialogo para indicar los zumbadores en una casilla
     function preguntaMonton() {
         $("#zumbadores-dialog").dialog({
+            title: Localization.$placeBeepersTitle,
             resizable: false,
-            height:180,
+            height:220,
             modal: true,
             buttons: {
                 Ok: function () {
@@ -380,7 +383,7 @@ KAREL.utils = (function () {
                         var cantidad=Number(s);
                         
                         if (cantidad>100){
-                            $('#error-cantidad-zumbadores').text('El máximo valor posible es 100.');
+                            $('#error-cantidad-zumbadores').text(Localization.$errorMaxBeeperCount);
                             KAREL.utils.setCasilla(100);
                         }
                         else{
@@ -390,7 +393,7 @@ KAREL.utils = (function () {
                         }
                     }
                     else{
-                        $('#error-cantidad-zumbadores').text('Sólo son válidos números enteros positivos.');
+                        $('#error-cantidad-zumbadores').text(Localization.$errorNegativeCount);
                     }
                 },
                 Cancel: function() {
@@ -441,10 +444,12 @@ KAREL.utils = (function () {
 
 KAREL.compilador = (function () {
     var Utils = KAREL.utils,
+        Localization,
         displayErrores;
         
     $(document).ready(function () {
         displayErrores = document.getElementById("errores");
+        Localization = KAREL.localization;
     });
     
     //funciones
@@ -471,7 +476,7 @@ KAREL.compilador = (function () {
                 
                 programaCompilado.cuadruplos = undefined;
                 programaCompilado.fuente = "";
-                Utils.showMessageBox("Error","Hubo errores de compilación","closethick");
+                Utils.showMessageBox("Error", Localization.$errorCompilation, "closethick");
                 if (!Utils.showError) {
                     Utils.toggleErrores();
                 }
@@ -479,8 +484,8 @@ KAREL.compilador = (function () {
             else {
                 salida.total = 1;
                 salida.page = 1;
-                salida.rows = [{cell:[":D","¡Compilación exitosa!"]}];
-                Utils.showMessageBox("Compilación correcta", "Programa compilado exitosamente", "info");
+                salida.rows = [{cell:[":D",Localization.$compileSuccessRow]}];
+                Utils.showMessageBox(Localization.$compileSuccessTitle, Localization.$compileSuccessMsg, "info");
                 if (Utils.showError) {
                     Utils.toggleErrores();
                 }
@@ -495,7 +500,7 @@ KAREL.compilador = (function () {
             salida.rows = [{cell:[1,serror]}];
             programaCompilado.cuadruplos = undefined;
             programaCompilado.fuente = "";
-            Utils.showMessageBox("Error", "Hubo errores de compilación", "closethick");
+            Utils.showMessageBox("Error",  Localization.$errorCompilation, "closethick");
             if (!Utils.showError) {
                 Utils.toggleErrores();
             }
@@ -540,7 +545,7 @@ KAREL.compilador = (function () {
             };
 
             $("#correr").button("option", options);
-            Utils.showMessageBox("Info", "Ejecución finalizada. Terminación normal.", "check");
+            Utils.showMessageBox("Info", Localization.$executionFinished, "check");
             return 0;
         }
         return 2;
@@ -749,8 +754,8 @@ $(document).ready(function() {
     document.addEventListener("keydown",function(e){
         var presionada = String.fromCharCode(e.keyCode);
         $('.mueveMundo').blur();
-        var activeTab = $('li.ui-state-active a').html();
-        if (activeTab == "Mundo") {
+        var activeTab = $('li.ui-state-active a').prop("id");
+        if (activeTab == "tab-world") {
             switch (presionada) {
             //shortcuts para panning del mundo
             case "A":
@@ -771,13 +776,13 @@ $(document).ready(function() {
     
     //Poner la tabla de errores
     $('#tabla-errores').flexigrid({
-        title: 'Errores',
+        title: Localization.$compileTableTitle,
         dataType: 'json',
         resizable: false,
         height: 100,
         colModel: [
-            {display: '#línea', name : 'linea', width : 40, sortable : true, align: 'center'},
-            {display: 'descripción', name : 'descripcion', width : 600, sortable : false, align: 'left'}
+            {display: Localization.$lineNumberColumn, name : 'linea', width : 40, sortable : true, align: 'center'},
+            {display: Localization.$descriptionColumn, name : 'descripcion', width : 600, sortable : false, align: 'left'}
         ]
     });
     $('.ftitle').addClass('ui-widget-header').click(WF(Utils.toggleErrores));

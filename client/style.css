@@ -9,7 +9,14 @@
 
 @-ms-viewport {width:device-width} 
 @viewport {width: device-width}
- 
+
+@media all and (max-width: 400px) {
+	/* Hide the title that appears in the upper right corner in small screens */
+	#titulo {
+		display: none;
+	}
+}
+
 html,body{
 	margin:0;
 	padding:0;
@@ -34,7 +41,7 @@ select, input, textarea, button { font:99% sans-serif; }
 
 #tabs{
 	border:0;
-	margin:2px;
+	margin:0;
 	padding:0;
 	height:100%;
 }
@@ -44,7 +51,11 @@ select, input, textarea, button { font:99% sans-serif; }
     padding: 0;
 }
 #toolbarMundo input[type='number']{
-	width:50px;
+	width:44px;
+	height: 22px;
+	border: 1px solid #ddd;
+    font-weight: bold;
+	color: #ff0084;
 	text-align:right;
 }
 #toolbarPrograma, #toolbarMundo,#toolbarEjecucion{
@@ -53,7 +64,7 @@ select, input, textarea, button { font:99% sans-serif; }
 	padding:10px;
 	position:relative;
 	z-index:2;
-    border-bottom: 1px solid #d0d0d0;
+	border-bottom: 1px solid #d0d0d0;
 }
 #tabs .ui-tabs-nav{
 	border-radius:0;

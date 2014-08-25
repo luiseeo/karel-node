@@ -134,5 +134,25 @@ KAREL.localization = {
         }
     ],
     "$run": "Correr",
-    "$stop": "Correr"
+    "$stop": "Correr",
+    "$chooseWorld": "Escoge un mundo",
+    "$chooseProgram": "Escoge un programa",
+    "$editCellTitle": "Editar casilla",
+    "$lineNumberColumn": "# L�nea",
+    "$compileTableTitle": "Errores de compilaci�n",
+    "$descriptionColumn": "Descripci�n",
+    "$placeBeepersTitle": "Colocar zumbadores",
+    "$compileSuccessTitle": "Compilaci�n correcta",
+    "$compileSuccessMsg": "Programa compilado exitosamente",
+    "$compileSuccessRow": "�Compilaci�n exitosa!",
+    "$executionFinish": "Ejecuci�n finalizada. Terminaci�n normal",
+    "$errorNoWorldOpened": "No se ha abierto ning�n mundo",
+    "$errorNoProgramOpened": "No se ha abierto ning�n programa",
+    "$errorMaxBeeperCount": "El  m�ximo valor posible es 100",
+    "$errorNegativeCount": "S�lo son v�lidos n�meros enteros positivos",
+    "$errorCompilation": "Hubo errores de compilaci�n",
+    "$errorNoCompiled": "No hay un programa compilado para correr",
+    "$errorWallCrash": "Karel quiso pasar sobre una pared!",
+    "$errorPutBeeper": "Karel quiso dejar un zumbador pero ten�a la mochila vac�a!",
+    "$errorPickBeeper": "Karel quiso coger un zumbador pero no hab�a!"
 }

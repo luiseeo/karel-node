@@ -88,7 +88,8 @@ KAREL.drawing = (function () {
     }
     
     function Drawer (canvasFondo, canvasParedes, readonly) {
-        var Drawing = KAREL.drawing;
+        var Drawing = KAREL.drawing,
+            Localization = KAREL.localization;
         this.mundo = mundo;
         this.canvas = document.getElementById(canvasFondo);
         this.paredesLayer = document.getElementById(canvasParedes);
@@ -123,6 +124,7 @@ KAREL.drawing = (function () {
                         mundo.clickY = Math.floor(coorY / side) + 1;
                         //mostrar el menú
                         $('#menu').dialog({
+                            title: Localization.$editCellTitle,
                             draggable: false,
                             resizable: false,
                             dialogClass: 'menu',
