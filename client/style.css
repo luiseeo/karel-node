@@ -7,6 +7,9 @@
  * Autor: Luis Eduardo Enciso
  */
 
+@-ms-viewport {width:device-width} 
+@viewport {width: device-width}
+ 
 html,body{
 	margin:0;
 	padding:0;
@@ -15,8 +18,8 @@ html,body{
 }
 
 body {
-    font:12px/1.231 sans-serif; 
-	min-width:800px;
+	font:12px/1.231 sans-serif; 
+	min-width:920px;
 }
 select, input, textarea, button { font:99% sans-serif; }
 
