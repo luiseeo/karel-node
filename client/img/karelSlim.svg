@@ -13,8 +13,8 @@
    height="297mm"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.1 r9760"
-   sodipodi:docname="Nuevo documento 1">
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="karelSlim.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -26,14 +26,14 @@
      inkscape:pageshadow="2"
      inkscape:zoom="22.4"
      inkscape:cx="26.458192"
-     inkscape:cy="25.489605"
+     inkscape:cy="21.155302"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1224"
-     inkscape:window-height="776"
-     inkscape:window-x="56"
-     inkscape:window-y="24"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
@@ -81,6 +81,9 @@
        d="m 24.5,1017.8622 -10,10 4,4 3,-3 0,9 6,0 0,-9 3,3 4,-3.9872 z"
        id="path4409"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccccccccc" />
+       sodipodi:nodetypes="cccccccccc"
+       inkscape:export-filename="C:\Users\LuisEduardo\Documents\Git\karel-node\client\img\KLogo.png"
+       inkscape:export-xdpi="274.58994"
+       inkscape:export-ydpi="274.58994" />
   </g>
 </svg>

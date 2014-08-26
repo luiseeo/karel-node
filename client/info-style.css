@@ -1,0 +1,119 @@
+/**
+ * ============
+ * Karel online
+ * ============
+ * Styles for Karel online informational pages
+ * 
+ * Author: Luis Enciso
+ */
+
+html {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+    background: #fff;
+    color: #111;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+h1 {
+    font-size: 170%;
+    color: #0073ea;
+    text-shadow: 3px 3px 1px #ddd;
+}
+
+h2 {
+    font-size: 130%;
+    color: #0073ea;
+    text-shadow: 2px 2px 1px #ddd;
+    font-weight: normal;
+}
+
+.container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 20px;
+    /*background: #f0f0f0;*/
+}
+
+@media all and (max-width: 400px) {
+    /* Decrease the padding in all screens */
+    .container {
+        padding: 10px;
+    }
+}
+
+div#header{
+    
+}
+div#main {
+}
+div#footer{
+    color: white;
+    background: #222;
+    font-size: 12px;
+}
+#footer .container {
+    padding: 10px;
+    text-align: center;
+}
+
+a#logo {
+    display: block;
+    padding-left: 80px;
+    color: #111;
+    text-decoration: none;
+    background-image: url('img/KLogo.png');
+    background-repeat: no-repeat;
+}
+#logo h1 {
+    margin: 4px 0;
+    font-size: 34px;
+    color: #111;
+}
+#logo h2 {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 16px;
+    color: #111;
+}
+
+#intro {
+    background: #303030;
+    color: #dddddd;
+}
+#intro  .container {
+    background: none;
+}
+
+a.button {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 10px 20px 0 0;
+    border: 1px solid #dddddd;
+    background: #f6f6f6;
+    font-weight: bold;
+    min-width: 180px;
+    text-align: center;
+    color: #ff0084;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+a.button:hover {
+    border: 1px solid #005EC0;
+    background: #0073ea;
+    color: white;
+}
+
+.editor {
+    position: relative;
+    width: 100%;
+    height: 120px;
+}
+
+#editor-recursion {
+    height: 156px;
+}

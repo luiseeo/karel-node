@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link type="image/x-icon" href="img/tema_grid/KNorte.png" rel="shortcut icon">
+	<title>Karel</title>
+    <link type="text/css" rel="stylesheet" href="normalize.css" />
+	<link type="text/css" rel="stylesheet" href="info-style.css" />
+    <script type="text/javascript" src="jquery/jquery-2.1.1.min.js"></script>
+    <!-- Ace editor -->
+	<script type="text/javascript" src="ace-src/ace.js" charset="utf-8"></script>
+	<script type="text/javascript" src="ace-src/theme-capek.js" charset="utf-8"></script>
+	<script type="text/javascript" src="ace-src/mode-karel.js" charset="utf-8"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <a id="logo" href="#">
+                <h1>Karel</h1>
+                <h2>Learn programming now</h2>
+            </a>
+        </div>
+    </div>
+    <div id="main">
+        <div id ="intro">
+            <div class="container">
+                <p>Karel is a programming language designed to teach the basics of programming. You will be programming Karel, a virtual robot, with a basic set of commands. It runs completely on the browser, you don't need to install or setup anything.</p>
+                <center>
+                    <a class="button" href="#">Watch a demo</a>
+                    <a class="button" href="index.html">Start coding now</a>
+                </center>
+            </div>
+        </div>
+        
+        <div class="container">
+            <h1>Quick overview</h1>
+            <h2>Karel's world</h2>
+            <p>Karel lives in a grid, and he can move to any 2 adjacent cells on it. However, there could be <strong>walls</strong> blocking the passage between 2 cellls.</p>
+            <p>Karel can also place or pick <strong>beepers</strong> in these cells. Beepers can be collected by Karel in his <strong>beeper bag</strong></p>
+            <p>Karel has to be careful to not crash!<p>
+            
+            <h2>Imperative programming</h2>
+            <p>Karel can perform some actions to interact within his environment</p>
+            <ul>
+                <li>Move forward</li>
+                <li>Turn left</li>
+                <li>Put beeper</li>
+                <li>Pick left</li>
+                <li>Turn off</li>
+            </ul>
+            <div id="editor-imperative" class="editor">pickbeeper();
+move();
+turnleft();
+move();
+putbeeper();
+turnoff();</div>
+            
+            <h2>Conditions</h2>
+            <p>We can teach Karel to perform some actions only when some conditions are met. For example, if the a wall is on front of him, he probably shouldn't move towards it :). Karel has some sensors to analyze his world<p>
+            <ul>
+                <li>Compass. Karel can know if he is facing North, South, East or West.</li>
+                <li>Collision detector. Karel can know if a wall is front of him or in one of his sides.</li>
+            </ul>
+            <div id="editor-conditions" class="editor">// Move if front is clear
+if (frontIsClear) {
+    move();
+}</div>
+            
+            
+            <h2>Loops</h2>
+            <p>We can teach Karel to repeat some actions several times or to repeat them while a condition is met</p>
+            <ul>
+                <li>Repeat a number of times</li>
+                <li>Repeat while a condition is met</li>
+            </ul>
+<div id="editor-loops" class="editor">// Face north
+while (!facingNorth) {
+    turnleft();
+}</div>
+            
+            <h2>Functions</h2>
+            <p>If you are planning the same group of instructions again and again, write a function.</p>
+            <div id="editor-functions" class="editor">void turnright() {
+    turnleft();
+    turnleft();
+    turnleft();
+}</div>
+            
+            <h2>Recursion</h2>
+            <p>When a function calls itself it is called recursion. Karel can learn advanced moves using recursion.</p>
+            <div id="editor-recursion" class="editor">// Measures the distance to the next wall
+void measureDistance() {
+    if (frontIsClear) {
+        move();
+        measureDistance();
+        putbeeper();
+    }
+}</div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="container">
+            KAREL THE ROBOT
+        </div>
+    </div>
+    <script>
+        var editors = [];
+        editors.push(ace.edit("editor-imperative"));
+        editors.push(ace.edit("editor-conditions"));
+        editors.push(ace.edit("editor-loops"));
+        editors.push(ace.edit("editor-functions"));
+        editors.push(ace.edit("editor-recursion"));
+        editors.forEach(function (editor) {
+            editor.setTheme("ace/theme/capek");
+            editor.getSession().setMode("ace/mode/karel");
+            editor.container.style.fontSize = "16px";
+            editor.setReadOnly(true);
+            editor.setHighlightActiveLine(false);
+        });
+    </script>
+<body>
+</html>
