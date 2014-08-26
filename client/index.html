@@ -51,8 +51,8 @@
 					<input type="checkbox" id="valve"/><label id="valve-label" for="valve">_Activar válvulas_</label>
 					<button id="new-world">_Nuevo_</button>
 					<button id="open-world">_Abrir_</button>
-					<button id="save-world">_Guardar_</button>
-					<button id="save-as-world">_Guardar como..._</button>
+					<!--button id="save-world">_Guardar_</button-->
+					<!--button id="save-as-world">_Guardar como..._</button-->
 					
 					&nbsp;&nbsp;&nbsp;
 					<button class="mueveMundo" id="mueve-izq">a</button>
@@ -105,8 +105,8 @@
 
 					<button id="new-program">_Nuevo_</button>
 					<button id="open-program">_Abrir_</button>
-					<button id="save-program">_Guardar_</button>
-					<button id="save-as-program">_Guardar como..._</button>
+					<!--button id="save-program">_Guardar_</button-->
+					<!--button id="save-as-program">_Guardar como..._</button-->
 					<button id="compile">_Compilar_</button>
 				</div>
 			</div>
@@ -133,11 +133,9 @@
 			</div>
 			<div id="chooser" title="Escoge un _algo_">
 				<ul>
-					<li onclick="KAREL.utils.abrirMundo('ciudad.txt');">Ciudad</li>
-					<li onclick="KAREL.utils.abrirMundo('escalera.txt');">Escalera</li>
-					<li onclick="KAREL.utils.abrirMundo('carita.txt');">Carita</li>
-					<li onclick="KAREL.utils.abrirMundo('laberinto.txt');">Laberinto</li>
-					<li onclick="KAREL.utils.abrirPrograma('laberinto.txt');">Laberinto JSK</li>
+                    <li onclick="KAREL.utils.abrirDemo('laberinto.txt');">Labyrinth</li>
+                    <li onclick="KAREL.utils.abrirDemo('fibonacci.txt');">Fibonacci</li>
+                    <li onclick="KAREL.utils.abrirDemo('paint.txt');">Paint</li>
 				</ul>
 			</div>
 		</section>
@@ -147,6 +145,7 @@
 					<button id="initialize">_Inicializar_</button>
 					<button id="step">_Adelante_</button>
 					<button id="run">_Correr_</button>
+                    <button id="run-demo">_Abrir demo_</button>
 					<label id="delay-label" for="amount">_Retraso:_</label>
 					<div style="display:inline-block;width:250px;top:2px;" id="slider-retraso"></div>
 					<span id="delay" style="border:0;color:#ff0084; font-weight:bold;width:50px;">_0_</span>

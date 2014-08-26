@@ -34,7 +34,7 @@ KAREL.localization = {
         },
         {
             "id": "open-world",
-            "content": "Abrir"
+            "content": "Abrir demo"
         },
         {
             "id": "save-world",
@@ -50,7 +50,7 @@ KAREL.localization = {
         },
         {
             "id": "open-program",
-            "content": "Abrir"
+            "content": "Abrir demo"
         },
         {
             "id": "save-program",
@@ -75,6 +75,10 @@ KAREL.localization = {
         {
             "id": "run",
             "content": "Correr"
+        },
+        {
+            "id": "run-demo",
+            "content": "Abrir demo"
         },
         {
             "id": "delay-label",
@@ -145,7 +149,7 @@ KAREL.localization = {
     "$compileSuccessTitle": "Compilaci�n correcta",
     "$compileSuccessMsg": "Programa compilado exitosamente",
     "$compileSuccessRow": "�Compilaci�n exitosa!",
-    "$executionFinish": "Ejecuci�n finalizada. Terminaci�n normal",
+    "$executionFinished": "Ejecuci�n finalizada. Terminaci�n normal",
     "$errorNoWorldOpened": "No se ha abierto ning�n mundo",
     "$errorNoProgramOpened": "No se ha abierto ning�n programa",
     "$errorMaxBeeperCount": "El  m�ximo valor posible es 100",

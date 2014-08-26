@@ -7,17 +7,18 @@ beepers-label,Beepers in bag:,Zumbadores en la mochila:
 infinite-label,Infinite,Infinito
 valve-label,Activate valves,Activar válvulas
 new-world,New,Nuevo
-open-world,Open,Abrir
+open-world,Open demo,Abrir demo
 save-world,Save,Guardar
 save-as-world,Save as... ,Guardar como... 
 new-program,New,Nuevo
-open-program,Open,Abrir
+open-program,Open demo,Abrir demo
 save-program,Save,Guardar
 save-as-program,Save as... ,Guardar como... 
 compile,Compile,Compilar
 initialize,Initialize,Inicializar
 step,Step,Adelante
 run,Run,Correr
+run-demo,Open demo,Abrir demo
 delay-label,Delay:,Retraso:
 beepers-label2,Beepers in bag:,Zumbadores en la mochila:
 cell-karel-north,Karel facing North,Karel al Norte
@@ -44,7 +45,7 @@ $placeBeepersTitle,Place beepers,Colocar zumbadores
 $compileSuccessTitle,Compile suceeded,Compilación correcta
 $compileSuccessMsg,The program was compiled successfully,Programa compilado exitosamente
 $compileSuccessRow,Compile suceeded!,¡Compilación exitosa!
-$executionFinish,Execution finished normally,Ejecución finalizada. Terminación normal
+$executionFinished,Execution finished normally,Ejecución finalizada. Terminación normal
 $errorNoWorldOpened,There's no world opened yet,No se ha abierto ningún mundo
 $errorNoProgramOpened,There's no program opened yet,No se ha abierto ningún programa
 $errorMaxBeeperCount,The maximum allowed value is 100,El  máximo valor posible es 100

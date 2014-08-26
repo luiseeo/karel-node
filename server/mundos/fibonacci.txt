@@ -1,0 +1,1 @@
+{"zumbadores":{"montones":{},"enMochila":999},"paredes":{"muros":{}},"karelX":1,"karelY":1,"orientacion":"este"}

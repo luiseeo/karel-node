@@ -168,7 +168,7 @@ KAREL.utils = (function () {
         });
     }
     //funciones toolbar MUNDO
-    function abrirMundo(archivo) {
+    function abrirMundo(archivo, callback) {
         $.get("server/mundos/"+archivo, function(content) {
             //cargar el mundo, solo cargar los datos (cuidado con sobreescribir funciones)
             var mundoJSON = JSON.parse(content);
@@ -178,10 +178,14 @@ KAREL.utils = (function () {
             mundo.karelX = mundoJSON.karelX;
             mundo.karelY = mundoJSON.karelY;
             mundo.orientacion = mundoJSON.orientacion;
+            $("#en-mochila").prop("value", mundo.zumbadores.enMochila);
             KAREL.utils.edicionDrawing.draw();
+            if (typeof callback === "function") {
+                callback();
+            }
         });
         nombreMundo = archivo;
-        $("#chooser").dialog("close");
+        //$("#chooser").dialog("close");
     }
     function nuevoMundo() {
         mundo.zumbadores.enMochila = 0;
@@ -260,12 +264,16 @@ KAREL.utils = (function () {
         document.getElementById("editor-programa").style.fontSize = newfontSize;
         document.getElementById("editor-ejecucion").style.fontSize = newfontSize;
     }
-    function abrirPrograma(archivo) {
+    function abrirPrograma(archivo, callback) {
+        var compile = compile || false;
         $.get("server/programas/"+archivo, function (content) {
             KAREL.utils.editorPrograma.getSession().setValue(content);
+            if (typeof callback === "function") {
+                callback();
+            }
         });
         nombrePrograma = archivo;
-        $("#chooser").dialog("close");
+        //$("#chooser").dialog("close");
     }
     function nuevoPrograma() {
         //llenar con el código fuente inicial
@@ -327,6 +335,18 @@ KAREL.utils = (function () {
                 }
             }
         });    
+    }
+    // funciones para demos
+    function abrirDemo(demo) {
+        abrirMundo(demo, function() {
+            abrirPrograma(demo, function () {
+                KAREL.compilador.compile(true);
+                KAREL.compilador.initialize();
+                $("#tab-world").click();
+                $("#tab-run").click();
+                $("#chooser").dialog( "close" );
+            });
+        });
     }
     
     //funciones de panneo del mundo
@@ -405,6 +425,19 @@ KAREL.utils = (function () {
         });
     }
     
+    function parseGET(val) {
+        var result = null,
+            tmp = [];
+        location.search
+            .substr(1)
+            .split("&")
+            .forEach(function (item) {
+                tmp = item.split("=");
+                if (tmp[0] === val) result = decodeURIComponent(tmp[1]);
+            });
+        return result;
+    }
+    
     //API pública
     return {
         //propiedades
@@ -429,6 +462,7 @@ KAREL.utils = (function () {
         abrirPrograma: abrirPrograma,
         nuevoPrograma: nuevoPrograma,
         guardarPrograma: guardarPrograma,
+        abrirDemo: abrirDemo,
         panIzq: panIzq,
         panDer: panDer,
         panArr: panArr,
@@ -436,6 +470,7 @@ KAREL.utils = (function () {
         highlightLine: highlightLine,
         posiciona: posiciona,
         preguntaMonton: preguntaMonton,
+        parseGET: parseGET,
         getMundoEjecucion: function(){
             return mundoEjecucion;
         }
@@ -453,8 +488,9 @@ KAREL.compilador = (function () {
     });
     
     //funciones
-    function compile() {
-        var salida = {},
+    function compile(silent) {
+        var silent = silent || false,
+            salida = {},
             rows = [],
             serror;
         try {
@@ -485,7 +521,9 @@ KAREL.compilador = (function () {
                 salida.total = 1;
                 salida.page = 1;
                 salida.rows = [{cell:[":D",Localization.$compileSuccessRow]}];
-                Utils.showMessageBox(Localization.$compileSuccessTitle, Localization.$compileSuccessMsg, "info");
+                if (!silent) {
+                    Utils.showMessageBox(Localization.$compileSuccessTitle, Localization.$compileSuccessMsg, "info");
+                }
                 if (Utils.showError) {
                     Utils.toggleErrores();
                 }
@@ -697,7 +735,8 @@ $(document).ready(function() {
     
     //botones en pestaña "Mundo"
     $("#toolbar-mundo button#new-world").button(icon('document')).click(WF(Utils.nuevoMundo));
-    $("#toolbar-mundo button#open-world").button(icon('folder-open')).click(WF(Utils.showMundoChooser));
+    //$("#toolbar-mundo button#open-world").button(icon('folder-open')).click(WF(Utils.showMundoChooser));
+    $("#toolbar-mundo button#open-world").button(icon('star')).click(WF(Utils.showMundoChooser));
     $("#toolbar-mundo button#save-world").button(icon('disk')).click(WF(Utils.guardarMundo));
     $("#toolbar-mundo button#save-as-world").button(icon('disk')).click(WF(Utils.guardarComoMundo));
     $("#toolbar-mundo input#infinite").button(icon('link'));
@@ -715,7 +754,8 @@ $(document).ready(function() {
     $("#toolbar-programa button#zoom-in").button(noTextIcon('zoomin', 'Text zoom-in')).click(WF(Utils.zoomIn));
     $("#toolbar-programa button#zoom-out").button(noTextIcon('zoomout', 'Text zoom-out')).click(WF(Utils.zoomOut));
     $("#toolbar-programa button#new-program").button(icon('document')).click(WF(Utils.nuevoPrograma));
-    $("#toolbar-programa button#open-program").button(icon('folder-open')).click(WF(Utils.showProgramChooser));
+    //$("#toolbar-programa button#open-program").button(icon('folder-open')).click(WF(Utils.showProgramChooser));
+    $("#toolbar-programa button#open-program").button(icon('star')).click(WF(Utils.showProgramChooser));
     $("#toolbar-programa button#save-program").button(icon('disk')).click(WF(Utils.guardarPrograma));
     $("#toolbar-programa button#save-as-program").button(icon('disk')).click(WF(Utils.guardarComoPrograma));
     $("#toolbar-programa button#compile").button(icon('circle-triangle-e')).click(WC(Compilador.compile));
@@ -736,6 +776,7 @@ $(document).ready(function() {
         $(this).button("option", options);
         Compilador.run();
     });
+    $("#toolbar-ejecucion button#run-demo").button(icon('star')).click(WF(Utils.showMundoChooser));
     //range input para delay
     $("#slider-retraso").slider({
         range: "min",
@@ -804,6 +845,12 @@ $(document).ready(function() {
     //rellenar el browser
     Utils.rellenoVertical();
     Utils.toggleErrores();
+    
+    // Cargar un demo si esta el parametro GET
+    var demo = Utils.parseGET("demo");
+    if (demo !== null) {
+        Utils.abrirDemo(demo + ".txt");
+    }
 });
 
 //En el evento de redimensionar hacer relleno

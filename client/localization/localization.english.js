@@ -34,7 +34,7 @@ KAREL.localization = {
         },
         {
             "id": "open-world",
-            "content": "Open"
+            "content": "Open demo"
         },
         {
             "id": "save-world",
@@ -50,7 +50,7 @@ KAREL.localization = {
         },
         {
             "id": "open-program",
-            "content": "Open"
+            "content": "Open demo"
         },
         {
             "id": "save-program",
@@ -75,6 +75,10 @@ KAREL.localization = {
         {
             "id": "run",
             "content": "Run"
+        },
+        {
+            "id": "run-demo",
+            "content": "Open demo"
         },
         {
             "id": "delay-label",
@@ -145,7 +149,7 @@ KAREL.localization = {
     "$compileSuccessTitle": "Compile suceeded",
     "$compileSuccessMsg": "The program was compiled successfully",
     "$compileSuccessRow": "Compile suceeded!",
-    "$executionFinish": "Execution finished normally",
+    "$executionFinished": "Execution finished normally",
     "$errorNoWorldOpened": "There's no world opened yet",
     "$errorNoProgramOpened": "There's no program opened yet",
     "$errorMaxBeeperCount": "The maximum allowed value is 100",
