@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link type="image/x-icon" href="img/tema_grid/KNorte.png" rel="shortcut icon">
+	<title>Karel</title>
+	<!-- main style -->
+	<link type="text/css" href="style.css" rel="stylesheet" />	
+	<!-- jquery, jquery ui, flexigrid and splitter -->
+	<link type="text/css" href="jquery/css/jquery-ui.min.css" rel="stylesheet" />
+	<link type="text/css" href="jquery/css/flexigrid/flexigrid.css" rel="stylesheet" />
+	<script type="text/javascript" src="jquery/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="jquery/flexigrid.pack.js"></script>
+	<script type="text/javascript" src="jquery/jquery-ui-1.11.0.min.js"></script>
+	<!-- Karel gráfico (cosas de canvas)-->
+	<script type="text/javascript" src="ui/init.js"></script>
+	<script type="text/javascript" src="localization/localization.english.js"></script>
+	<script type="text/javascript" src="ui/karelDraw.js"></script>
+	<script type="text/javascript" src="ui/mundo.js"></script>
+	<!-- Ace editor -->
+	<script type="text/javascript" src="ace-src/ace.js" charset="utf-8"></script>
+	<!--script type="text/javascript" src="src/theme-twilight.js" charset="utf-8"></!--script-->
+	<!--script type="text/javascript" src="src/theme-kr_theme.js" charset="utf-8"></script-->
+	<script type="text/javascript" src="ace-src/theme-capek.js" charset="utf-8"></script>
+	<!--script type="text/javascript" src="src/mode-javakarel.js" charset="utf-8"></script-->
+	<script type="text/javascript" src="ace-src/mode-pascalkarel.js" charset="utf-8"></script>
+	<script type="text/javascript" src="ace-src/mode-karel.js" charset="utf-8"></script>
+	<!-- compilador -->
+	<script type="text/javascript" src="parser/javakarel.js"> </script>
+	<script type="text/javascript" src="parser/paskarel.js"> </script>
+	<script type="text/javascript" src="parser/compilador.js"> </script>
+	<script type="text/javascript" src="parser/maquinavirtual.js"> </script>
+</head>
+<body>
+	<h1 id="titulo">Karel<span>Beta</span></h1>
+	<div id="tabs">
+		<ul>
+			<li><a id="tab-world" href="#mundo">_Mundo_</a></li>
+			<li><a id="tab-code" href="#programa">_Programa_</a></li>
+			<li><a id="tab-run" href="#ejecutar">_Ejecutar_</a></li>
+			<li><a id="tab-help" href="#ayuda">_Ayuda_</a></li>
+			<!--li><a href="#retos">Retos</a></li-->
+		</ul>
+		<section id="mundo" style="position:relative;"  oncontextmenu="return false;">
+			<div class="toolbar-container">
+				<div id="toolbar-mundo">
+					<span id="beepers-label">_Zumbadores en la mochila:_</span>
+					<input type="number" id="en-mochila" value="0" min="0" max="65534" autocomplete="off" onchange="mundo.zumbadores.enMochila=Number(this.value);"/>
+					<input type="checkbox" id="infinite"/><label id="infinite-label" for="infinite">_Infinito_</label>
+					<input type="checkbox" id="valve"/><label id="valve-label" for="valve">_Activar válvulas_</label>
+					<button id="new-world">_Nuevo_</button>
+					<button id="open-world">_Abrir_</button>
+					<!--button id="save-world">_Guardar_</button-->
+					<!--button id="save-as-world">_Guardar como..._</button-->
+					
+					&nbsp;&nbsp;&nbsp;
+					<button class="mueveMundo" id="mueve-izq">a</button>
+					<button class="mueveMundo" id="mueve-arr">w</button>
+					<button class="mueveMundo" id="mueve-der">d</button>
+					<button class="mueveMundo" id="mueve-aba">s</button>
+				</div>
+			</div>
+			<div style="position:relative">
+				<canvas id="edicion-mundo" width="1000" height="600"></canvas>
+				<canvas id="edicion-layer-paredes" width="1000" height="500" style="position:absolute;left:0;top:0;z-index:1;"></canvas>
+				<div id="pared-vertical">&nbsp;</div>
+				<div id="pared-horizontal">&nbsp;</div>
+			</div>
+			<div id="menu" title="_Editar casilla_">
+				<ul>
+					<li id="cell-karel-north" onclick="KAREL.utils.posiciona(mundo.clickX,mundo.clickY,'norte');">_Karel al Norte_</li>
+					<li id="cell-karel-east" onclick="KAREL.utils.posiciona(mundo.clickX,mundo.clickY,'este');">_Karel al Este_</li>
+					<li id="cell-karel-south" onclick="KAREL.utils.posiciona(mundo.clickX,mundo.clickY,'sur');">_Karel al Sur_</li>
+					<li id="cell-karel-west" onclick="KAREL.utils.posiciona(mundo.clickX,mundo.clickY,'oeste');">_Karel al Oeste_</li>
+					<li id="set-0-beepers" onclick="KAREL.utils.setCasilla(0);">_0 zumbadores_</li>
+					<li id="set-1-beepers" onclick="KAREL.utils.setCasilla(1);">_1 zumbador_</li>
+					<li id="set-2-beepers" onclick="KAREL.utils.setCasilla(2);">_2 zumbadores_</li>
+					<li id="set-3-beepers" onclick="KAREL.utils.setCasilla(3);">_3 zumbadores_</li>
+					<li id="set-4-beepers" onclick="KAREL.utils.setCasilla(4);">_4 zumbadores_</li>
+					<li id="set-n-beepers" onclick="KAREL.utils.preguntaMonton();">_N zumbadores ..._</li>
+					<li id="set-inf-beepers" onclick="KAREL.utils.setCasilla(Infinity);">_INFINITOS zumbadores_</li>
+				</ul>
+			</div>
+			<div id="zumbadores-dialog" title="_Colocar zumbadores_">
+				<p><span class="ui-icon ui-icon-help" style="float:left; margin:0 7px 20px 0;"></span>
+				<span id="beepers-question">_¿Cuántos?_</span>
+				</p>
+				<input id="cantidad-zumbadores" type="number" value="5" min="0" max="100"/>
+				<div id="error-cantidad-zumbadores" style="color:orange;">&nbsp;</div>
+			</div>
+		</section>
+		<section id="programa">
+			<div class="toolbar-container">
+				<div id="toolbar-programa">
+					<span id="lenguaje">
+						<input type="radio" id="pascal" name="lenguaje" checked="checked" /><label for="pascal">Pascal</label>
+						<input type="radio" id="java" name="lenguaje" /><label for="java">Java</label>
+					</span>
+
+					<span id="zoom-tools">
+						<button id="zoom-in">&nbsp;</button>
+						<button id="zoom-out">&nbsp;</button>
+					</span>
+
+					<button id="new-program">_Nuevo_</button>
+					<button id="open-program">_Abrir_</button>
+					<!--button id="save-program">_Guardar_</button-->
+					<!--button id="save-as-program">_Guardar como..._</button-->
+					<button id="compile">_Compilar_</button>
+				</div>
+			</div>
+			<pre id="editor-programa" style="position:relative;">class program{
+	program() {
+		
+		turnoff();
+	}
+}</pre>
+			<div id="errores">
+				<table id="tabla-errores">
+					<tbody>
+						<tr>
+							<td>?</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="generic-dialog">&nbsp;</div>
+			<div id="guardar-como-dialog" title="Guardar como">
+				<input id="nombre-guardar-como" type="text" />
+				<div id="error-guardar-como" style="color:orange;">&nbsp;</div>
+			</div>
+			<div id="chooser" title="Escoge un _algo_">
+				<ul>
+                    <li onclick="KAREL.utils.abrirDemo('laberinto.txt');">Labyrinth</li>
+                    <li onclick="KAREL.utils.abrirDemo('fibonacci.txt');">Fibonacci</li>
+                    <li onclick="KAREL.utils.abrirDemo('paint.txt');">Paint</li>
+				</ul>
+			</div>
+		</section>
+		<section id="ejecutar" style="position:relative;">
+			<div class="toolbar-container">
+				<div id="toolbar-ejecucion">
+					<button id="initialize">_Inicializar_</button>
+					<button id="step">_Adelante_</button>
+					<button id="run">_Correr_</button>
+                    <button id="run-demo">_Abrir demo_</button>
+					<label id="delay-label" for="amount">_Retraso:_</label>
+					<div style="display:inline-block;width:250px;top:2px;" id="slider-retraso"></div>
+					<span id="delay" style="border:0;color:#ff0084; font-weight:bold;width:50px;">_0_</span>
+					<label id="beepers-label2">_Zumbadores en la mochila:_</label>
+					<span id="zumbadores-ejecucion" style="color:#ff0084; font-weight:bold;width:50px;font-size:17px;">0</span>
+				</div>
+			</div>
+			<div style="position:relative" oncontextmenu="return false;">
+				<div id="tapon" style="position:absolute;width:334px;background-color:rgba(0,0,255,0.01);z-index:3;">&nbsp;</div>
+				<pre id="editor-ejecucion" style="position:absolute;width:350px;">lol</pre>
+				<canvas id="ejecucion-mundo" style="position:absolute;right:0;" height="500" width="500"></canvas>
+				<canvas id="ejecucion-layer-paredes" style="position:absolute;right:0;" height="500" width="500"></canvas>
+			</div>
+		</section>
+		
+		<section id="ayuda" style="position:relative;">
+		</section>
+		<section id="retos" style="position:relative;">
+			<p>Intenta los siguientes retos de Karel:<p>
+			<h2>Suma de números</h2>
+			<p>Has un programa que simule la suma de 2 números. En la casilla (1,1) aparecerá un montón de zumbadores, en la casilla (1,2) habrá otro montón. Karel debe dejar un montón en la casilla (1,3) con la suma de ambos números. Karel iniciará con 0 zumbadores en la mochila y no habrá paredes en el mundo.</p>
+			<h2>Multiplicación de números</h2>
+			<p>Has un programa para que karel multiplique 2 números. Uno aparecerá en la casilla (1,1) y el otro en la casilla (1,2). Karel debe dejar un montón en la casilla (1,3) con la multiplicación de ambos números. Karel tendrá infinitos zumbadores y no habrá paredes en el mundo.<p>
+			<h2>Multiplicación de números. Reloaded</h2>
+			<p>Has un programa para que karel multiplique 2 números. Uno aparecerá en la casilla (1,1) y el otro en la casilla (1,2). Karel debe dejar un montón en la casilla (1,3) con la multiplicación de ambos números. Habrá paredes y válvulas como en la siguiente imagen:</p>
+			Inicio: <img alt="[Multiplicación reloaded INPUT]" src="doc/multiplicaReloadedIN.png"/> Fin:<img alt="[Multiplicación reloaded OUTPUT]" src="doc/multiplicaReloadedOUT.png"/>
+			<h3>Eventualmente habrá muchos más problemitas :)</h3>
+		</section>
+	</div>
+</body>
+</html>
