@@ -116,8 +116,8 @@ var mundo = (function () {
         clickX: 1,
         clickY: 1,
         //guardan el tamaño del mundo en pixeles
-        width: 100,
-        height: 100,
+        width: 400,
+        height: 400,
         //guarda el panneo del mundo
         pan: [-40, -40],
         
