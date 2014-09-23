@@ -45,6 +45,10 @@ KAREL.localization = {
             "content": "Guardar como... "
         },
         {
+            "id": "language-label",
+            "content": "Lenguaje:"
+        },
+        {
             "id": "new-program",
             "content": "Nuevo"
         },

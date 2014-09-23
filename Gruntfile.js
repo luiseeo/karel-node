@@ -51,11 +51,42 @@ module.exports = function(grunt) {
                     ]
                 }
             }
+        },
+        jison: {
+            /*java: {
+                files: { 'client/parser/javakarel.js': 'client/parser/javakarel.jison' }
+            },
+            pascal: {
+                files: { 'client/parser/paskarel.js': 'client/parser/paskarel.jison' }
+            },*/
+            python: {
+                options: { moduleName: 'pythonkarel'},
+                files: { 'client/parser/pythonkarel.js': 'client/parser/pythonkarel.jison' }
+            }
+        },
+        execute: {
+            buildace: {
+                options: {
+                    args: ['-m']
+                },
+                src: ['../ace/Makefile.dryice.js']
+            }
+        },
+        copy: {
+            highlight: {
+                expand: true,
+                flatten: true,
+                src: ['../ace/build/src-min/mode-*karel.js'],
+                dest: 'client/ace-src/'
+            }
         }
     });
     
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-jison');
+    grunt.loadNpmTasks('grunt-execute');
     
     // Default task(s).
     grunt.registerTask('default', ['uglify', 'cssmin']);
@@ -96,4 +127,9 @@ module.exports = function(grunt) {
             );
         }
     });
+    
+    grunt.registerTask('parser', ['jison']);
+    
+    grunt.registerTask('highlight', ['execute:buildace', 'copy:highlight']);
+    grunt.registerTask('highlightcopy', ['copy:highlight']);
 };

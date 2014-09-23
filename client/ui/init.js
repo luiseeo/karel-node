@@ -23,37 +23,31 @@ KAREL.utils = (function () {
         layerParedesMundo,
         mundoEjecucion,
         layerParedesEjecucion,
-        javaRadio,
-        modePascal,
-        modeJava,
+        lenguajeSelect,
         Localization;
     
     //inicializaciones a hacer una vez que este listo el DOM
     $(document).ready(function () {
         var Utils = KAREL.utils,
-            Drawing = KAREL.drawing,
-            ModePascal = require("ace/mode/pascalkarel").Mode,
-            ModeJava = require("ace/mode/karel").Mode;
-        modePascal = new ModePascal();
-        modeJava = new ModeJava();
+            Drawing = KAREL.drawing;
         mundoElement = document.getElementById('edicion-mundo');
         layerParedesMundo = document.getElementById('edicion-layer-paredes');
         mundoEjecucion = document.getElementById('ejecucion-mundo');
         layerParedesEjecucion = document.getElementById('ejecucion-layer-paredes');
-        javaRadio = $("#lenguaje #java");
+        lenguajeSelect = $("#lenguaje");
         Localization = KAREL.localization;
         //cargar el editor de texto
         Utils.editorPrograma = ace.edit("editor-programa");
         Utils.editorPrograma.setTheme("ace/theme/capek");
         //Disponibles: kr_theme,twilight,twilight
         Utils.editorPrograma.renderer.setShowPrintMargin(false);
-        Utils.editorPrograma.getSession().setMode(modeJava);
+        Utils.editorPrograma.getSession().setMode(KAREL.languages["java"].highlightMode);
         document.getElementById("editor-programa").style.fontSize = "14px";
         //editor de texto de ejecucion
         Utils.editorEjecucion = ace.edit("editor-ejecucion");
         Utils.editorEjecucion.setTheme("ace/theme/capek");
         Utils.editorEjecucion.renderer.setShowPrintMargin(false);
-        Utils.editorEjecucion.getSession().setMode(modeJava);
+        Utils.editorEjecucion.getSession().setMode(KAREL.languages["java"].highlightMode);
         Utils.editorEjecucion.setReadOnly(true);
         document.getElementById("editor-ejecucion").style.fontSize = "14px";
 
@@ -116,15 +110,13 @@ KAREL.utils = (function () {
     }
 
     function toggleLenguaje() {
-        console.log("Cambiando a " + javaRadio.prop("checked"));
-        if (javaRadio.prop("checked")) {
-            this.editorPrograma.getSession().setMode(modeJava);
-            this.editorEjecucion.getSession().setMode(modeJava);
-        }
-        else {
-            this.editorPrograma.getSession().setMode(modePascal);
-            this.editorEjecucion.getSession().setMode(modePascal);
-        }
+        var selectedLang = lenguajeSelect.prop("value");
+        console.log("Cambiando a " + selectedLang);
+        var lenguaje = KAREL.languages[selectedLang];
+        
+        this.editorPrograma.getSession().setMode(lenguaje.highlightMode);
+        this.editorEjecucion.getSession().setMode(lenguaje.highlightMode);
+        KAREL.compilador.setParser(lenguaje.parser);
     }
     function setCasilla(valor) {
         mundo.zumbadores.poner(mundo.clickX, mundo.clickY, valor);
@@ -277,19 +269,8 @@ KAREL.utils = (function () {
     }
     function nuevoPrograma() {
         //llenar con el código fuente inicial
-        if( $("#pascal").prop('checked')){
-            this.editorPrograma.getSession().setValue("iniciar-programa\n\n"+
-                "	inicia-ejecucion\n"+
-                "		apagate;\n"+
-                "	termina-ejecucion\n"+
-                "finalizar-programa");
-        } else{
-            this.editorPrograma.getSession().setValue("class program{\n\n"+
-                "	program(){\n"+
-                "		turnoff();\n"+
-                "	}\n"+
-                "}");
-        }
+        var lenguaje = KAREL.languages[lenguajeSelect.prop("value")];
+        this.editorPrograma.getSession().setValue(lenguaje.initialCode);
     }
     function guardarPrograma(){
         if (nombrePrograma === undefined){
@@ -480,7 +461,8 @@ KAREL.utils = (function () {
 KAREL.compilador = (function () {
     var Utils = KAREL.utils,
         Localization,
-        displayErrores;
+        displayErrores,
+        parser;
         
     $(document).ready(function () {
         displayErrores = document.getElementById("errores");
@@ -488,6 +470,10 @@ KAREL.compilador = (function () {
     });
     
     //funciones
+    function setParser(parserArg) {
+        parser = parserArg;
+    }
+    
     function compile(silent) {
         var silent = silent || false,
             salida = {},
@@ -495,15 +481,18 @@ KAREL.compilador = (function () {
             serror;
         try {
             programaCompilado.fuente = Utils.editorPrograma.getSession().getValue();
-            if (document.getElementById("java").checked) {
+            
+            programaCompilado.get(parser);
+            /*if (document.getElementById("java").checked) {
                 programaCompilado.get(javakarel);
             }
             else {
                 programaCompilado.fuente = programaCompilado.fuente.toLowerCase();
                 programaCompilado.get(paskarel)
-            }
+            }*/
             if (programaCompilado.errores.length != 0){
                 errores.forEach(function (error) {
+                    console.log(error.message);
                     rows.push({cell:[error.lineNo,error.message]});
                 });
                 salida.total = errores.lenght;
@@ -531,6 +520,7 @@ KAREL.compilador = (function () {
         }
         catch (error){
             serror = String(error);
+            console.log(serror);
             //quitar los tabs para que los errores se despliegue bien
             serror = serror.replace(/\t/g," ");
             salida.total = 1;
@@ -646,6 +636,7 @@ KAREL.compilador = (function () {
         //propiedades
         retraso: 500,
         //metodos
+        setParser: setParser,
         compile: compile,
         initialize: initialize,
         step: step,
@@ -748,8 +739,12 @@ $(document).ready(function() {
     $("#menu").on({ "contextmenu": function (e) { e.preventDefault(); } });
     
     //botones en pestaña "Programa"
-    $("#toolbar-programa #lenguaje #java").prop("checked","checked");
-    $("#toolbar-programa #lenguaje").buttonset().click(WF(Utils.toggleLenguaje));
+    $("#toolbar-programa #lenguaje").selectmenu({
+        width: "100px",
+        change: WF(Utils.toggleLenguaje)
+    });
+    //$("#toolbar-programa #lenguaje").prop("checked","checked");
+    //$("#toolbar-programa #lenguaje").buttonset().click(WF(Utils.toggleLenguaje));
     $("#toolbar-programa #zoom-tools").buttonset();
     $("#toolbar-programa button#zoom-in").button(noTextIcon('zoomin', 'Text zoom-in')).click(WF(Utils.zoomIn));
     $("#toolbar-programa button#zoom-out").button(noTextIcon('zoomout', 'Text zoom-out')).click(WF(Utils.zoomOut));

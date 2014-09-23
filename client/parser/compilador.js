@@ -6,6 +6,45 @@
  * Autor: Montserrat Gonzalez Arenas
  * Fecha: Mayo/1/2011
  */
+
+KAREL.languages = {
+    java: {
+        label: "Java",
+        parser: javakarel,
+        highlightMode: new (require("ace/mode/karel").Mode)(),
+        initialCode: "class program {\n" +
+            "    \n" +
+            "    program () {\n" +
+            "        \n" +
+            "        turnoff();\n" +
+            "    }\n" +
+            "}"
+    },
+    pascal: {
+        label: "Pascal",
+        parser: paskarel,
+        highlightMode: new (require("ace/mode/pascalkarel").Mode)(),
+        initialCode: "iniciar-programa\n" +
+            "    \n" +
+            "    inicia-ejecucion\n" +
+            "        \n" +
+            "        apagate;\n" +
+            "    termina-ejecucion\n" +
+            "finalizar-programa"
+    },
+    python: {
+        label: "Python",
+        parser: pythonkarel,
+        highlightMode: new (require("ace/mode/pythonkarel").Mode)(),
+        initialCode: "def turnright():\n" +
+            "    turnleft()\n" +
+            "    turnleft()\n" +
+            "    turnleft()\n" +
+            "\n" +
+            "turnoff()"
+    },
+};
+ 
 var programaCompilado= (function(){//Objeto que contiene las variables y las funciones para compilar.
 var helper = {
 //Codigo fuente que sera compilado y al que corresponden los cuadruplos
@@ -55,7 +94,7 @@ programaCompilado.get(parser) lo utiliza unicamente la funcion compila() en edit
 */
 ,get: function (parserkarel){ 
 //Inicializacion de variables
-    	this.cuadruplos= new Array();
+	this.cuadruplos= new Array();
 	this.errores = new Array();
 	this.dirproc= new Object();
 //Generar los cuadruplos de acuerdo al parser
