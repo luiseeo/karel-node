@@ -495,7 +495,7 @@ KAREL.compilador = (function () {
                     console.log(error.message);
                     rows.push({cell:[error.lineNo,error.message]});
                 });
-                salida.total = errores.lenght;
+                salida.total = errores.length;
                 salida.page = 1;
                 salida.rows = rows;
                 
@@ -521,11 +521,14 @@ KAREL.compilador = (function () {
         catch (error){
             serror = String(error);
             console.log(serror);
-            //quitar los tabs para que los errores se despliegue bien
+            //quitar los tabs para que los errores se despliegue bien, y envolver en "pre" para respetar los saltos de linea
             serror = serror.replace(/\t/g," ");
+            serror = "<pre>" + serror + "</serror>";
             salida.total = 1;
             salida.page = 1;
-            salida.rows = [{cell:[1,serror]}];
+            var matches = /line (\d+)/.exec(serror),
+                lineNo = matches ? matches[1] : "-";
+            salida.rows = [{cell:[lineNo,serror]}];
             programaCompilado.cuadruplos = undefined;
             programaCompilado.fuente = "";
             Utils.showMessageBox("Error",  Localization.$errorCompilation, "closethick");

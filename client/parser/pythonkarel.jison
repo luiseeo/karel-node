@@ -20,8 +20,8 @@ id                          [a-zA-Z][a-zA-Z0-9'-']*
                                     this.begin("normal");
                                     return 'START';
                                 %}
-<normal>"//".*                  /* ignorar comentarios */
-<normal>"/*"(.|\n)*"*/"         /* ignorar comentarios */
+<normal>"#".*                   /* ignorar comentarios */
+<normal>"\"\"\""(.|\n)*"\"\"\""  /* ignorar comentarios */
 <normal>"program"               return 'PROGRAM';
 <normal>"def"                   return 'DEF';
 <normal>"turnoff"               return 'TURNOFF';
@@ -90,6 +90,7 @@ id                          [a-zA-Z][a-zA-Z0-9'-']*
                                     }
                                     if (currentIndentation !== indentStack[0]) {
                                         // Raise an error
+                                        return 'INDENTERROR';
                                     }
                                     
                                     this.popState();

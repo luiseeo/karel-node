@@ -1033,6 +1033,7 @@ case 41:
                                     }
                                     if (currentIndentation !== indentStack[0]) {
                                         // Raise an error
+                                        return 'INDENTERROR';
                                     }
                                     
                                     this.popState();
@@ -1070,7 +1071,7 @@ case 49:return 'INVALID';
 break;
 }
 },
-rules: [/^(?:.)/,/^(?:\/\/.*)/,/^(?:\/\*(.|\n)*\*\/)/,/^(?:program\b)/,/^(?:def\b)/,/^(?:turnoff\b)/,/^(?:turnleft\b)/,/^(?:move\b)/,/^(?:pickbeeper\b)/,/^(?:putbeeper\b)/,/^(?:return\b)/,/^(?:pred\b)/,/^(?:succ\b)/,/^(?:iszero\b)/,/^(?:if\b)/,/^(?:else\b)/,/^(?:while\b)/,/^(?:for\b)/,/^(?:in\b)/,/^(?:range\b)/,/^(?:frontIsClear\b)/,/^(?:frontIsBlocked\b)/,/^(?:leftIsClear\b)/,/^(?:leftIsBlocked\b)/,/^(?:rightIsClear\b)/,/^(?:rightIsBlocked\b)/,/^(?:nextToABeeper\b)/,/^(?:beepersInBag\b)/,/^(?:facingNorth\b)/,/^(?:facingSouth\b)/,/^(?:facingEast\b)/,/^(?:facingWest\b)/,/^(?:([1-9][0-9]*|0))/,/^(?:or\b)/,/^(?:and\b)/,/^(?:not\b)/,/^(?:([a-zA-Z][a-zA-Z0-9'-']*))/,/^(?: )/,/^(?:\t)/,/^(?:\n)/,/^(?:$)/,/^(?:.)/,/^(?:\n)/,/^(?:\s*$)/,/^(?::)/,/^(?:\()/,/^(?:\))/,/^(?:\s+)/,/^(?:$)/,/^(?:.)/],
+rules: [/^(?:.)/,/^(?:#.*)/,/^(?:"""(.|\n)*""")/,/^(?:program\b)/,/^(?:def\b)/,/^(?:turnoff\b)/,/^(?:turnleft\b)/,/^(?:move\b)/,/^(?:pickbeeper\b)/,/^(?:putbeeper\b)/,/^(?:return\b)/,/^(?:pred\b)/,/^(?:succ\b)/,/^(?:iszero\b)/,/^(?:if\b)/,/^(?:else\b)/,/^(?:while\b)/,/^(?:for\b)/,/^(?:in\b)/,/^(?:range\b)/,/^(?:frontIsClear\b)/,/^(?:frontIsBlocked\b)/,/^(?:leftIsClear\b)/,/^(?:leftIsBlocked\b)/,/^(?:rightIsClear\b)/,/^(?:rightIsBlocked\b)/,/^(?:nextToABeeper\b)/,/^(?:beepersInBag\b)/,/^(?:facingNorth\b)/,/^(?:facingSouth\b)/,/^(?:facingEast\b)/,/^(?:facingWest\b)/,/^(?:([1-9][0-9]*|0))/,/^(?:or\b)/,/^(?:and\b)/,/^(?:not\b)/,/^(?:([a-zA-Z][a-zA-Z0-9'-']*))/,/^(?: )/,/^(?:\t)/,/^(?:\n)/,/^(?:$)/,/^(?:.)/,/^(?:\n)/,/^(?:\s*$)/,/^(?::)/,/^(?:\()/,/^(?:\))/,/^(?:\s+)/,/^(?:$)/,/^(?:.)/],
 conditions: {"indent":{"rules":[37,38,39,40,41],"inclusive":false},"normal":{"rules":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,42,43,44,45,46,47,48],"inclusive":false},"INITIAL":{"rules":[0,49],"inclusive":true}}
 });
 return lexer;

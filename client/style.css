@@ -30,8 +30,12 @@ body {
 }
 select, input, textarea, button { font:99% sans-serif; }
 
+pre {
+	margin: 0;
+}
+
 .ui-selectmenu-button {
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 #editor-programa,#editor-ejecucion { 
@@ -52,7 +56,7 @@ select, input, textarea, button { font:99% sans-serif; }
 
 #tabs section{
 	background-color:#a0a0a0;
-    padding: 0;
+	padding: 0;
 }
 #toolbar-mundo input[type='number']{
 	width:44px;
