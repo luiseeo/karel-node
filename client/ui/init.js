@@ -321,6 +321,7 @@ KAREL.utils = (function () {
     function abrirDemo(demo) {
         abrirMundo(demo, function() {
             abrirPrograma(demo, function () {
+                KAREL.compilador.setParser(KAREL.languages["java"].parser);
                 KAREL.compilador.compile(true);
                 KAREL.compilador.initialize();
                 $("#tab-world").click();
@@ -776,16 +777,25 @@ $(document).ready(function() {
     });
     $("#toolbar-ejecucion button#run-demo").button(icon('star')).click(WF(Utils.showMundoChooser));
     //range input para delay
+    function escala(input) {
+        // Le da al slider de delay mejor
+        // Los valores se incremental lentamente en la izquierda y rápido en la derecha
+        var xScaled = Math.pow(input/1000, 2);
+        return Math.round(1000*xScaled);
+    }
     $("#slider-retraso").slider({
         range: "min",
         value: 500,
         min: 0,
         max: 1000,
         slide: function(event, ui) {
-            retrasoEl.text(ui.value + "ms");
-            Compilador.retraso = ui.value;
+            var value = escala(ui.value);
+            retrasoEl.text(value + "ms");
+            Compilador.retraso = value;
         }
     });
+    
+    
     Compilador.retraso = $("#slider-retraso").slider("value");
     retrasoEl.text(Compilador.retraso + "ms");
     
